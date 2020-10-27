@@ -16,7 +16,7 @@ function CardUI()
     var lastName = ud.lastName;
     
     
-    const app_name = 'mern-card-tut'
+    const app_name = 'cop4331-group11-large'
     function buildPath(route)
     {
         if (process.env.NODE_ENV === 'production') 
