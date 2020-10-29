@@ -1,66 +1,41 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const path = require('path');
 const PORT = process.env.PORT || 5000;
-const emailAPI = require(path.resolve(__dirname, "./emailer.js"));
+const emailAPI = require("./emailer");
 
+// Express setup
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.set('port', (process.env.PORT || 5000));
 
-require('dotenv').config();
+// MongoDB connection
 const url = process.env.MONGODB_URI;
-
 const MongoClient = require('mongodb').MongoClient;
-
 const client = new MongoClient(url);
 client.connect();
 
-///////////////////////////////////////////////////
-// For Heroku deployment
+const {login, refresh} = require("./authentication");
 
+// For Heroku deployment
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') 
 {
   // Set static folder
-  app.use(express.static('frontend/build'));
+  app.use(express.static(path.join(__dirname, '/../frontend/build')));
 
   app.get('*', (req, res) => 
  {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '/../frontend/build/index.html'));
   });
 }
 //////////////////////////////////////////////////
-
-// app.post('/api/addcard', async (req, res, next) =>
-// {
-//   // incoming: userId, color
-//   // outgoing: error
-	
-//   const { userId, card } = req.body;
-
-//   const newCard = {Card:card,UserId:userId};
-//   var error = '';
-
-//   try
-//   {
-//     const db = client.db();
-//     const result = db.collection('Cards').insertOne(newCard);
-//   }
-//   catch(e)
-//   {
-//     error = e.toString();
-//   }
-
-//   //cardList.push( card );
-
-//   var ret = { error: error };
-//   res.status(200).json(ret);
-// });
-
 
 app.post('/api/login', async (req, res, next) => 
 {
@@ -96,33 +71,6 @@ app.post('/api/login', async (req, res, next) =>
   var ret = { id:id, firstName:fn, lastName:ln, error:''};
   res.status(200).json(ret);
 });
-
-
-// app.post('/api/searchcards', async (req, res, next) => 
-// {
-//   // incoming: userId, search
-//   // outgoing: results[], error
-
-//   var error = '';
-
-//   const { userId, search } = req.body;
-
-//   var _search = search.trim();
-  
-//   const db = client.db();
-//   const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
-  
-//   var _ret = [];
-//   for( var i=0; i<results.length; i++ )
-//   {
-//     _ret.push( results[i].Card );
-//   }
-  
-//   var ret = {results:_ret, error:error};
-//   res.status(200).json(ret);
-// });
-
-
 
 app.use((req, res, next) => 
 {
