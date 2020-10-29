@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const path = require('path');
 const PORT = process.env.PORT || 5000;
+const emailAPI = require(path.resolve(__dirname, "./emailer.js"));
 
 const app = express();
 app.use(cors());
@@ -82,6 +83,14 @@ app.post('/api/login', async (req, res, next) =>
     id = results[0].userId;
     fn = results[0].firstName;
     ln = results[0].lastName;
+
+    // Used to test sending emails
+    // try {
+    //     emailAPI.sendEmail("test", "test");
+    // } catch (e) {
+    //     console.error(e);
+    //     throw e;
+    // }
   }
 
   var ret = { id:id, firstName:fn, lastName:ln, error:''};
