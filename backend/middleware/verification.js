@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const secret = process.env.ACCESS_TOKEN_SECRET
 
 //middleware function to check if the incoming request in authenticated:
-exports.checkAuth = (req, res, next) => {
+exports.verify = (req, res, next) => {
     // get the token stored in the custom header called 'x-auth-token'
     const token = req.get("x-auth-token");
 
