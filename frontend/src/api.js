@@ -1,4 +1,5 @@
 import axios from "axios"
+axios.defaults.withCredentials = true;
 
 const app_name = 'cop4331-group11-large'
 var url;
@@ -34,10 +35,11 @@ axios.interceptors.response.use(
             !originalRequest._retry
         ) {
             originalRequest._retry = true;
-            return axios.post(`${url}/auth/refresh`)
+            return axios.get(`${url}/auth/refresh`)
             .then((res) => {
                 if (res.status === 200) {
-                    localStorage.setItem('accessToken', res.data.accessToken);
+                    let accessToken = JSON.stringify(res.data.accessToken);
+                    localStorage.setItem('accessToken', accessToken);
                     console.log('Refreshed access token.')
                     return axios(originalRequest);
                 }
@@ -61,7 +63,7 @@ const api = {
         return axios.delete(`${url}/auth/logout`);
     },
     protected: () => {
-        return axios.get(`${url}/auth/signup`);
+        return axios.get(`${url}/protected`);
     }
 };
 

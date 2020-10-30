@@ -10,7 +10,7 @@ const api = require("./routes/router");
 
 // Express setup
 const app = express();
-app.use(cors());
+app.use(cors({origin: process.env.ORIGIN, credentials: true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -36,6 +36,14 @@ if (process.env.NODE_ENV === 'production')
     res.sendFile(path.join(__dirname, '/../frontend/build/index.html'));
   });
 }
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', process.env.ORIGIN);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  next();
+})
 
 app.get("/", (req, res) => {
   return res.status(200).send('ok');

@@ -16,11 +16,13 @@ const userSchema = new mongoose.Schema({
 userSchema.methods = {
     createAccessToken: async function() {
         try {
-            let {_id, username} = this;
+            let {_id, userName} = this;
+            console.log(_id + ' ' + userName);
             let accessToken = jwt.sign(
-                {user: {_id, username}},
+                {user: {_id, userName}},
                 ACCESS_TOKEN_SECRET, {expiresIn: ACCESS_TOKEN_LIFE}
             );
+
             return accessToken;
         } catch(e) {
             console.error(e);
@@ -29,11 +31,12 @@ userSchema.methods = {
     },
     createRefreshToken: async function() {
         try{
-            let {_id, username} = this;
+            let {_id, userName} = this;
             let refreshToken = jwt.sign(
-                {user: {_id, username}},
+                {user: {_id, userName}},
                 REFRESH_TOKEN_SECRET, {expiresIn: REFRESH_TOKEN_LIFE}
             );
+
             await new Token({token: refreshToken}).save();
             return refreshToken;
         } catch(e) {
