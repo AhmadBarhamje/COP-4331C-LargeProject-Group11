@@ -26,10 +26,10 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         //check if user exists in database:
-        let user = await User.findOne({ username: req.body.username });
+        let user = await User.findOne({ userName: req.body.userName });
         //send error if no user found:
         if (!user) {
-            return res.status(404).json({ error: "No user found!" });
+            return res.status(200).json({ id: -1 });
         } else {
             //check if password is valid:
             let valid = await bcrypt.compare(req.body.password, user.password);
@@ -37,10 +37,16 @@ exports.login = async (req, res) => {
                 //generate a pair of tokens if valid and send
                 let accessToken = await user.createAccessToken();
                 let refreshToken = await user.createRefreshToken();
-                return res.status(200).json({ accessToken, refreshToken });
+                let id = user._id;
+                let firstName = user.firstName;
+                let lastName = user.lastName;
+                let userName = user.userName;
+
+                res.cookie('refreshToken', refreshToken);
+                return res.status(200).json({ accessToken, id, firstName, lastName, userName});
             } else {
                 //send error if password is invalid
-                return res.status(401).json({ error: "Invalid password!" });
+                return res.status(200).json({ id: -1 });
             }
         }
     } catch (e) {
@@ -52,7 +58,7 @@ exports.login = async (req, res) => {
 exports.refresh = async (req, res) => {
     try {
         //get refreshToken
-        const { refreshToken } = req.body;
+        const { refreshToken } = req.cookies.refreshToken;
         //send error if no refreshToken is sent
         if (!refreshToken) {
             return res.status(403).json({ error: "Access denied,token missing!" });

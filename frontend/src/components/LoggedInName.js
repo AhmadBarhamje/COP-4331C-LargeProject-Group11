@@ -9,6 +9,8 @@ function LoggedInName()
     var firstName = ud.firstName;
     var lastName = ud.lastName;
 
+    console.log(_ud);
+    console.log(localStorage.getItem('accessToken'));
     const doLogout = event => 
     {
 	    event.preventDefault();
@@ -21,7 +23,7 @@ function LoggedInName()
   return(
    <div id="loggedInDiv">
    <span id="userName">Logged In As {firstName} {lastName}</span><br />
-   <button type="button" id="logoutButton" class="buttons" 
+   <button type="button" id="logoutButton" className="buttons" 
      onClick={doLogout}> Log Out </button>
    </div>
   );

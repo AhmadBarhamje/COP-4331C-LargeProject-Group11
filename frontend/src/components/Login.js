@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import api from '../api';
 
 function Login()
 {
@@ -6,42 +7,34 @@ function Login()
     var loginPassword;
 
     const [message,setMessage] = useState('');
-    const app_name = 'cop4331-group11-large';
-    function buildPath(route)
-    {
-        if (process.env.NODE_ENV === 'production') 
-        {
-            return 'https://' + app_name +  '.herokuapp.com/' + route;
-        }
-        else
-        {        
-            return 'http://localhost:5000/' + route;
-        }
-    }
 
     const doLogin = async event => 
     {
         event.preventDefault();
 
-        var obj = {login:loginName.value,password:loginPassword.value};
+        var obj = {userName:loginName.value,
+                   password:loginPassword.value};
         var js = JSON.stringify(obj);
-
+        let res
         try
         {    
-            const response = await fetch(buildPath('api/login'),
-                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            res = await api.login(obj); 
 
-            var res = JSON.parse(await response.text());
-
-            if( res.id <= 0 )
+            if( res.data.id === -1 )
             {
                 setMessage('User/Password combination incorrect');
             }
             else
             {
-                var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+                var user = {id:res.data.id,
+                            firstName:res.data.firstName,
+                            lastName:res.data.lastName,
+                            userName:res.data.userName}
                 localStorage.setItem('user_data', JSON.stringify(user));
+                var accessToken = JSON.stringify(res.data.accessToken);
+                localStorage.setItem('accessToken', accessToken)
 
+                console.log(localStorage.getItem('accessToken'));
                 setMessage('');
                 window.location.href = '/cards';
             }
