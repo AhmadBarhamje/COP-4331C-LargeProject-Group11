@@ -16,6 +16,7 @@ axios.interceptors.request.use(
         if (accessToken) {
             config.headers['x-auth-token'] = accessToken;
         }
+        config.headers['content-type'] = 'application/json; charset=utf-8'
         return config;
     },
     (error) => {
