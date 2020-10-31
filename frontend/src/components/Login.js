@@ -14,7 +14,6 @@ function Login()
 
         var obj = {userName:loginName.value,
                    password:loginPassword.value};
-        var js = JSON.stringify(obj);
         let res
         try
         {    

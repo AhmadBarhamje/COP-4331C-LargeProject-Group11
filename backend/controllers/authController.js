@@ -57,7 +57,6 @@ exports.login = async (req, res) => {
 
 exports.refresh = async (req, res) => {
     try {
-        console.log(req.cookies);
         //get refreshToken
         const refreshToken = req.cookies['refreshToken'];
         //send error if no refreshToken is sent
@@ -72,8 +71,6 @@ exports.refresh = async (req, res) => {
             } else {
                 //extract payload from refresh token and generate a new access token and send it
                 const payload = jwt.verify(tokenDoc.token, REFRESH_TOKEN_SECRET);
-                console.log('Refresh payload:')
-                console.log(payload);
                 const accessToken = jwt.sign({ user: payload.user }, ACCESS_TOKEN_SECRET, {
                 expiresIn: ACCESS_TOKEN_LIFE,
                 });
@@ -89,8 +86,9 @@ exports.refresh = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         //delete the refresh token saved in database:
-        const { refreshToken } = req.body;
-        await Token.findOneAndDelete({ token: refreshToken });
+        const { userId } = req.body;
+        //await Token.findOneAndDelete({ token: refreshToken });
+        await Token.deleteMany({userId: userId});
         return res.status(200).json({ success: "User logged out!" });
     } catch (error) {
         console.error(error);

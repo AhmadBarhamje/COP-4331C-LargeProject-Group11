@@ -37,7 +37,7 @@ userSchema.methods = {
                 REFRESH_TOKEN_SECRET, {expiresIn: REFRESH_TOKEN_LIFE}
             );
 
-            await new Token({token: refreshToken}).save();
+            await new Token({token: refreshToken, userId: _id}).save();
             return refreshToken;
         } catch(e) {
             console.error(e);
