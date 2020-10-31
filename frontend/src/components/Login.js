@@ -18,7 +18,7 @@ function Login()
         try
         {    
             res = await api.login(obj); 
-
+            console.log(res);
             if( res.data.id === -1 )
             {
                 setMessage('User/Password combination incorrect');

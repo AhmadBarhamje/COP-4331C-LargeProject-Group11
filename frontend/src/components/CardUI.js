@@ -61,7 +61,7 @@ function CardUI()
         try
         {
             const res = await api.protected();
-            console.log(res.data);
+            console.log(res);
         }
         catch(e)
         {
