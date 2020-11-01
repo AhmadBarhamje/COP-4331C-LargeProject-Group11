@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import api from '../api';
 
 function CardUI()
 {
@@ -49,7 +50,7 @@ function CardUI()
 
 	};
 
-
+    // Testing middleware
     const searchCard = async event => 
     {
         event.preventDefault();
@@ -59,23 +60,9 @@ function CardUI()
 
         try
         {
-            const response = await fetch(buildPath('api/searchcards'),
-            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-
-            var txt = await response.text();
-            var res = JSON.parse(txt);
-            var _results = res.results;
-            var resultText = '';
-            for( var i=0; i<_results.length; i++ )
-            {
-                resultText += _results[i];
-                if( i < _results.length - 1 )
-                {
-                    resultText += ', ';
-                }
-            }
-            setResults('Card(s) have been retrieved');
-            setCardList(resultText);
+            const res = await api.protected();
+            console.log(res);
+            console.log(res.data);
         }
         catch(e)
         {
