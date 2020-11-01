@@ -12,11 +12,8 @@ exports.verify = (req, res, next) => {
         try {
             //if the incoming request has a valid token, we extract the payload from the token and attach it to the request object.
             const payload = jwt.verify(JSON.parse(token), secret);
-            console.log(payload.user.userName);
-            console.log(payload.user._id);
             req.user = {userName: payload.user.userName,
                             id: payload.user._id};
-            console.warn(req.user);
             next();
         } catch (error) {
             // token can be expired or invalid. Send appropriate errors in each case:

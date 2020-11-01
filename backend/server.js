@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === 'production')
   // Set static folder
   app.use(express.static(path.join(__dirname, '/../frontend/build')));
 
-  app.get('*', (req, res) => 
+  app.get('/', (req, res) => 
  {
     res.sendFile(path.join(__dirname, '/../frontend/build/index.html'));
   });
@@ -45,9 +45,9 @@ app.use(function(req, res, next) {
   next();
 })
 
-// app.get("/", (req, res) => {
-//   return res.status(200).send('ok');
-// })
+app.get("/", (req, res) => {
+  return res.status(200).send('ok');
+})
 
 app.use('/api', api);
 
