@@ -45,9 +45,9 @@ app.use(function(req, res, next) {
   next();
 })
 
-app.get("/", (req, res) => {
-  return res.status(200).send('ok');
-})
+// app.get("/", (req, res) => {
+//   return res.status(200).send('ok');
+// })
 
 app.use('/api', api);
 
