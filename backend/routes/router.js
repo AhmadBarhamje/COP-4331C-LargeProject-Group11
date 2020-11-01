@@ -10,7 +10,7 @@ router.get('/auth/refresh', AuthController.refresh);
 
 router.delete('/auth/logout', AuthController.logout);
 
-router.get('/protected', Middleware.verify, (req, res) => {
+router.post('/protected', Middleware.verify, (req, res) => {
     res.setHeader('content-type', 'application/json; charset=utf-8')
     return res.status(200).json({userName: req.user.userName,
                                  id: req.user.id});

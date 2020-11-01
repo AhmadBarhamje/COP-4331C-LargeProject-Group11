@@ -64,7 +64,7 @@ const api = {
         return axios.delete(`${url}/auth/logout`);
     },
     protected: () => {
-        return axios.get(`${url}/protected`);
+        return axios.post(`${url}/protected`);
     }
 };
 
