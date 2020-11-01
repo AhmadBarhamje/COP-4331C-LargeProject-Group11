@@ -6,7 +6,7 @@ router.post('/auth/signup', AuthController.signup);
 
 router.post('/auth/login', AuthController.login);
 
-router.get('/auth/refresh', AuthController.refresh);
+router.post('/auth/refresh', AuthController.refresh);
 
 router.delete('/auth/logout', AuthController.logout);
 

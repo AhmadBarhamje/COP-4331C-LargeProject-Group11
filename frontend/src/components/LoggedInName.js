@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../api';
 
 function LoggedInName()
 {
@@ -15,7 +16,10 @@ function LoggedInName()
     {
 	    event.preventDefault();
 
-        localStorage.removeItem("user_data")
+        // call logout api here
+        localStorage.removeItem('user_data');
+        localStorage.removeItem('accessToken')
+        // delete refresh cookie here
         window.location.href = '/';
 
     };    

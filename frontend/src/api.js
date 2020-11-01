@@ -36,11 +36,12 @@ axios.interceptors.response.use(
             !originalRequest._retry
         ) {
             originalRequest._retry = true;
-            return axios.get(`${url}/auth/refresh`)
+            return axios.post(`${url}/auth/refresh`)
             .then((res) => {
                 if (res.status === 200) {
                     let accessToken = JSON.stringify(res.data.accessToken);
                     localStorage.setItem('accessToken', accessToken);
+                    console.log(accessToken);
                     console.log('Refreshed access token.')
                     return axios(originalRequest);
                 }
@@ -58,10 +59,10 @@ const api = {
         return axios.post(`${url}/auth/login`, body);
     },
     refresh: () => {
-        return axios.get(`${url}/auth/refresh`);
+        return axios.post(`${url}/auth/refresh`);
     },
-    logout: () => {
-        return axios.delete(`${url}/auth/logout`);
+    logout: (body) => {
+        return axios.delete(`${url}/auth/logout`, body);
     },
     protected: () => {
         return axios.post(`${url}/protected`);

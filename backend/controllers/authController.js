@@ -87,7 +87,7 @@ exports.logout = async (req, res) => {
     try {
         //delete the refresh token saved in database:
         const { userId } = req.body;
-        //await Token.findOneAndDelete({ token: refreshToken });
+        console.log(userId);
         await Token.deleteMany({userId: userId});
         return res.status(200).json({ success: "User logged out!" });
     } catch (error) {
