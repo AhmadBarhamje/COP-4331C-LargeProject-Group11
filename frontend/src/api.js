@@ -1,9 +1,10 @@
 import axios from "axios"
 axios.defaults.withCredentials = true;
 
-var url;
+// const app_name = 'cop4331-group11-large';
+const app_name = 'group11largeproject-dev';
 if (process.env.NODE_ENV === 'production') {
-    url = 'https://' + process.env.APP_NAME +  '.herokuapp.com/api';
+    url = 'https://' + app_name +  '.herokuapp.com/api';
 }
 else {        
     url = 'http://localhost:5000/api';
