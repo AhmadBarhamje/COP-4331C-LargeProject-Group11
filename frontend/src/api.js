@@ -3,6 +3,7 @@ axios.defaults.withCredentials = true;
 
 // const app_name = 'cop4331-group11-large';
 const app_name = 'group11largeproject-dev';
+var url;
 if (process.env.NODE_ENV === 'production') {
     url = 'https://' + app_name +  '.herokuapp.com/api';
 }
