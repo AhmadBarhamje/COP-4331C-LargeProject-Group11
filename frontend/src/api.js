@@ -1,8 +1,6 @@
 import axios from "axios"
 axios.defaults.withCredentials = true;
 
-const app_name = 'cop4331-group11-large';
-//const app_name = 'group11largeproject-dev';
 var url;
 if (process.env.NODE_ENV === 'production') {
     url = 'https://' + process.env.REACT_APP_NAME +  '.herokuapp.com/api';
@@ -42,7 +40,6 @@ axios.interceptors.response.use(
                 if (res.status === 200) {
                     let accessToken = JSON.stringify(res.data.accessToken);
                     localStorage.setItem('accessToken', accessToken);
-                    console.log(accessToken);
                     console.log('Refreshed access token.')
                     return axios(originalRequest);
                 }
