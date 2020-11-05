@@ -37,7 +37,7 @@ axios.interceptors.response.use(
             !originalRequest._retry
         ) {
             originalRequest._retry = true;
-            return axios.post(`${url}/auth/refresh`)
+            return axios.get(`${url}/auth/refresh`)
             .then((res) => {
                 if (res.status === 200) {
                     let accessToken = JSON.stringify(res.data.accessToken);
@@ -60,7 +60,7 @@ const api = {
         return axios.post(`${url}/auth/login`, body);
     },
     refresh: () => {
-        return axios.post(`${url}/auth/refresh`);
+        return axios.get(`${url}/auth/refresh`);
     },
     logout: (body) => {
         return axios.delete(`${url}/auth/logout`, {data: body});
