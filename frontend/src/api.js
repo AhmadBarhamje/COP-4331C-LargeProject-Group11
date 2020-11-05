@@ -5,7 +5,7 @@ const app_name = 'cop4331-group11-large';
 //const app_name = 'group11largeproject-dev';
 var url;
 if (process.env.NODE_ENV === 'production') {
-    url = 'https://' + app_name +  '.herokuapp.com/api';
+    url = 'https://' + process.env.REACT_APP_NAME +  '.herokuapp.com/api';
 }
 else {        
     url = 'http://localhost:5000/api';
