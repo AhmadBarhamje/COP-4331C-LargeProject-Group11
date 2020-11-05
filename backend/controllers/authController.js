@@ -41,7 +41,6 @@ exports.login = async (req, res) => {
                 let firstName = user.firstName;
                 let lastName = user.lastName;
                 let userName = user.userName;
-                console.log(refreshToken);
                 res.cookie('refreshToken', refreshToken, {httpOnly: true});
                 return res.status(200).json({ accessToken, id, firstName, lastName, userName});
             } else {

@@ -10,16 +10,14 @@ function LoggedInName()
     var firstName = ud.firstName;
     var lastName = ud.lastName;
 
-    console.log(_ud);
-    console.log(localStorage.getItem('accessToken'));
     const doLogout = event => 
     {
 	    event.preventDefault();
-
-        // call logout api here
+        let _userData = localStorage.getItem('user_data');
+        let userData = JSON.parse(_userData);
+        api.logout({userId: userData.id});
         localStorage.removeItem('user_data');
         localStorage.removeItem('accessToken')
-        // delete refresh cookie here
         window.location.href = '/';
 
     };    

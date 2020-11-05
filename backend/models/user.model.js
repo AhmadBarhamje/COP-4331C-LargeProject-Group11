@@ -17,7 +17,6 @@ userSchema.methods = {
     createAccessToken: async function() {
         try {
             let {_id, userName} = this;
-            console.log(_id + ' ' + userName);
             let accessToken = jwt.sign(
                 {user: {_id, userName}},
                 ACCESS_TOKEN_SECRET, {expiresIn: ACCESS_TOKEN_LIFE}
