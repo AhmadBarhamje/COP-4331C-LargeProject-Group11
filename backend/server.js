@@ -24,6 +24,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(() => console.log("Connected to database."))
 .catch((e) => console.error(e));
 
+app.use('/api', api);
+
 // For Heroku deployment
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') 
@@ -44,12 +46,6 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();
 })
-
-app.get("/", (req, res) => {
-  return res.status(200).send('ok');
-})
-
-app.use('/api', api);
 
 app.listen(PORT, () =>
 {
