@@ -23,6 +23,10 @@ function Login()
             {
                 setMessage('User/Password combination incorrect');
             }
+            else if (res.data.id === -2)
+            {
+                setMessage('Account not verified')
+            }
             else
             {
                 var user = {id:res.data.id,

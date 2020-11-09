@@ -2,27 +2,67 @@ const User = require('../models/user.model')
 const Token = require('../models/token.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const emailer = require('./emailer')
 const {ACCESS_TOKEN_SECRET, ACCESS_TOKEN_LIFE, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_LIFE} = process.env;
 
 exports.signup = async (req, res) => {
     try {
         //check if username is already taken:
-        let user = await User.findOne({ userName: req.body.username });
+        var user
+        user = await User.findOne({ userName: req.body.userName });
         if (user) {
             return res.status(400).json({ error: "Username taken." });
-        } else {
-            //create new user and generate a pair of tokens and send
-            user = await new User(req.body).save();
-            let accessToken = await user.createAccessToken();
-            let refreshToken = await user.createRefreshToken();
-    
-            return res.status(201).json({ accessToken, refreshToken });
+        } 
+        // check if email taken
+        user = await User.findOne({ email: req.body.email });
+        if (user) {
+            return res.status(400).json({ error: "Email in use." });
         }
+
+        //create new user and generate a pair of tokens and send
+        // user = await new User(req.body).save();
+        var code = getRandomCode();
+        console.log(code);
+        user = await new User({email: req.body.email,
+                            userName: req.body.userName,
+                            password: req.body.password,
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            activationCode: code})
+                            .save()
+        let accessToken = await user.createAccessToken();
+        let refreshToken = await user.createRefreshToken();
+    
+        return res.status(201).json({ error: "" });
     } catch (e) {
         console.error(e);
         return res.status(500).json({ e: "Internal Server Error!" });
     }
 };
+
+function getRandomCode() {
+    min = 1000000;
+    max = 9999999;
+    return Math.floor(Math.random() * (max-min) + min);
+}
+
+exports.activate = async (req, res) => {
+    try {
+        let user = await User.findOne({ activationCode: req.body.code });
+        if (!user) {
+            return res.status(404).json({ error: "Cannot find user"})
+        } else {
+            user.activationCode = undefined;
+            user.active = true;
+            await user.save();
+            return res.status(200).json({ error: "" })
+        }
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ e: "Internal Server Error!"})
+    }
+}
+
 exports.login = async (req, res) => {
     try {
         //check if user exists in database:
@@ -34,6 +74,12 @@ exports.login = async (req, res) => {
             //check if password is valid:
             let valid = await bcrypt.compare(req.body.password, user.password);
             if (valid) {
+
+                // Check if account is active
+                if (!user.active) {
+                    return res.status(200).json({ id: -2 });
+                }
+
                 //generate a pair of tokens if valid and send
                 let accessToken = await user.createAccessToken();
                 let refreshToken = await user.createRefreshToken();

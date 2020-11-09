@@ -4,9 +4,12 @@ require('dotenv').config();
 
 var user = process.env.USER;
 var pass = process.env.PASS;
+const from = "scheduler@group11.com"
 
-async function sendEmail(to, type){
-    const { from, recipients, subject, message } = mailObj;
+
+async function sendRegistrationEmail(to, type){
+    const subject = "Activate your account"
+    const { from, recipients, message } = mailObj;
 
     // Create a transporter
     let transporter = nodemailer.createTransport({
@@ -30,6 +33,8 @@ async function sendEmail(to, type){
     return;
 }
 
+// function buildRegistration()
+
 // Hardcoded email params for testing
 const mailObj = {
   from: "scheduler@testemail.com",
@@ -38,4 +43,4 @@ const mailObj = {
   message: "Testing email",
 };
 
-module.exports.sendEmail = sendEmail;
+module.exports.sendEmail = sendRegistrationEmail;
