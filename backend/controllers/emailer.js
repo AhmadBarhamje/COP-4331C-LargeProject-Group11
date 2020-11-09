@@ -7,9 +7,8 @@ var pass = process.env.PASS;
 const from = "scheduler@group11.com"
 
 
-async function sendRegistrationEmail(to, type){
+async function sendRegistrationEmail(to, code){
     const subject = "Activate your account"
-    const { from, recipients, message } = mailObj;
 
     // Create a transporter
     let transporter = nodemailer.createTransport({
@@ -21,26 +20,38 @@ async function sendRegistrationEmail(to, type){
         },
     });
 
+    let html = buildRegistrationHTML(code);
+    let plainText = "Verify your email using this link " + buildURL(code);
+
     // send mail with defined transport object
     let mailStatus = await transporter.sendMail({
         from: from, // sender address
-        to: recipients, // list of recipients
+        to: to, // list of recipients
         subject: subject, // Subject line
-        text: message, // plain text
+        text: plainText, // plain text
+        html: html,
     });
+
 
     console.log(`Message sent: ${mailStatus.messageId}`);
     return;
 }
 
-// function buildRegistration()
+function buildRegistrationHTML(code) {
+    if (process.env.NODE_ENV === 'production'){
+        return "production activation email";
+    } else {
+        return '<b><a href="http://localhost:5000/api/auth/activate/' + code + '">Verify your email now!</a></b>'
+    }
+}
 
-// Hardcoded email params for testing
-const mailObj = {
-  from: "scheduler@testemail.com",
-  recipients: ["naas.christopher1@gmail.com"],
-  subject: "Test email subject",
-  message: "Testing email",
-};
+function buildURL(code) {
+    if (process.env.NODE_ENV === 'production'){
+        return "production activation email";
+    } else {
+        return 'http://localhost:5000/api/auth/activate/' + code
+    }
+}
 
-module.exports.sendEmail = sendRegistrationEmail;
+
+module.exports.sendRegistrationEmail = sendRegistrationEmail;

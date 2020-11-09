@@ -30,8 +30,8 @@ exports.signup = async (req, res) => {
                             lastName: req.body.lastName,
                             activationCode: code})
                             .save()
-        let accessToken = await user.createAccessToken();
-        let refreshToken = await user.createRefreshToken();
+
+        emailer.sendRegistrationEmail(user.email, code);
     
         return res.status(201).json({ error: "" });
     } catch (e) {
@@ -48,18 +48,19 @@ function getRandomCode() {
 
 exports.activate = async (req, res) => {
     try {
-        let user = await User.findOne({ activationCode: req.body.code });
+        let code = req.params.code;
+        let user = await User.findOne({ activationCode: code });
         if (!user) {
             return res.status(404).json({ error: "Cannot find user"})
         } else {
             user.activationCode = undefined;
             user.active = true;
             await user.save();
-            return res.status(200).json({ error: "" })
+            return res.redirect(process.env.ORIGIN);
         }
     } catch (e) {
         console.error(e);
-        res.status(500).json({ e: "Internal Server Error!"})
+        return res.status(500).json({ e: "Internal Server Error!"})
     }
 }
 
