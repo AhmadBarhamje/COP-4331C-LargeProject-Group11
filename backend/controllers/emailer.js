@@ -39,7 +39,7 @@ async function sendRegistrationEmail(to, code){
 
 function buildRegistrationHTML(code) {
     if (process.env.NODE_ENV === 'production'){
-        return "production activation email";
+        return '<b><a href="https://group11largeproject-dev.herokuapp.com/api/auth/activate/' + code + '">Verify your email now!</a></b>';
     } else {
         return '<b><a href="http://localhost:5000/api/auth/activate/' + code + '">Verify your email now!</a></b>'
     }
@@ -47,7 +47,7 @@ function buildRegistrationHTML(code) {
 
 function buildURL(code) {
     if (process.env.NODE_ENV === 'production'){
-        return "production activation email";
+        return 'https://group11largeproject-dev.herokuapp.com/api/auth/activate/' + code;
     } else {
         return 'http://localhost:5000/api/auth/activate/' + code
     }

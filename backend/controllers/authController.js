@@ -60,7 +60,7 @@ exports.activate = async (req, res) => {
         }
     } catch (e) {
         console.error(e);
-        return res.status(500).json({ e: "Internal Server Error!"})
+        return res.redirect(process.env.ORIGIN);
     }
 }
 
