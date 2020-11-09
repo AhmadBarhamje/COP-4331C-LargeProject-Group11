@@ -53,9 +53,7 @@ exports.activate = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "Cannot find user"})
         } else {
-            user.activationCode = undefined;
-            user.active = true;
-            await user.save();
+            await user.updateOne({ activationCode: undefined, active: true });
             return res.redirect(process.env.ORIGIN);
         }
     } catch (e) {
@@ -70,6 +68,7 @@ exports.login = async (req, res) => {
         let user = await User.findOne({ userName: req.body.userName });
         //send error if no user found:
         if (!user) {
+            console.log('User not found!');
             return res.status(200).json({ id: -1 });
         } else {
             //check if password is valid:
@@ -78,6 +77,7 @@ exports.login = async (req, res) => {
 
                 // Check if account is active
                 if (!user.active) {
+                    console.log('Email not verified!');
                     return res.status(200).json({ id: -2 });
                 }
 
@@ -92,6 +92,7 @@ exports.login = async (req, res) => {
                 return res.status(200).json({ accessToken, id, firstName, lastName, userName});
             } else {
                 //send error if password is invalid
+                console.log('Invalid password!');
                 return res.status(200).json({ id: -1 });
             }
         }
