@@ -53,12 +53,12 @@ exports.activate = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "Cannot find user"})
         } else {
-            await user.updateOne({ activationCode: undefined, active: true });
-            return res.redirect(process.env.ORIGIN);
+            await user.updateOne({$unset: {activationCode: ""}, active: true});
+            return res.status(200).redirect(process.env.ORIGIN);
         }
     } catch (e) {
         console.error(e);
-        return res.redirect(process.env.ORIGIN);
+        return res.status(500).redirect(process.env.ORIGIN);
     }
 }
 
