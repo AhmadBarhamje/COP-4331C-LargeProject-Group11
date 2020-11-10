@@ -69,7 +69,6 @@ export class Login extends Component {
             <View style={styles.container}>
 
               <View style = {styles.form}>
-
                 <TextInput
                   ref={input => { this.usernameField = input }}
                   style = {styles.textInput}
@@ -88,11 +87,10 @@ export class Login extends Component {
                  <TouchableOpacity
                       activeOpacity = {0.8}
                       onPress = {() => this._login()}
-                      style = {[styles.ButtonStyle, {backgroundColor: "#3badff"}]}
+                      style = {[styles.LoginButtonStyle, {backgroundColor: "#3badff"}]}
                 >
-                      <Text style = {styles.appButtonText}>Login</Text>
+                    <Text style = {styles.appButtonText}>Login</Text>
                 </TouchableOpacity>
-
               </View>
 
           </View>
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         justifyContent: "space-between"
     },
-    ButtonStyle: {
+    LoginButtonStyle: {
         marginTop:5,
         paddingTop:5,
         paddingBottom:5,
