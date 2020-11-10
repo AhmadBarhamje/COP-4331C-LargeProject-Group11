@@ -10,6 +10,7 @@ import {
   View,
   Text,
   TextInput,
+  TouchableOpacity,
   StatusBar,
 } from 'react-native';
 import axios from 'axios';
@@ -47,6 +48,7 @@ export class Login extends Component {
 
             if(res.data.id < 0) {
                 console.log("invalid username/password")
+                Alert.alert("Invalid username/password")
             }
             else {
                 this.props.navigation.navigate("Dashboard", {
@@ -64,32 +66,77 @@ export class Login extends Component {
 
     render() {
         return (
-            <View style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center"
-            }}>
+            <View style={styles.container}>
 
-            <TextInput
-              ref={input => { this.usernameField = input }}
-              style = {{ height: 40, width: 250, borderColor: 'black', backgroundColor: 'gray', borderWidth: 1 }}
-              placeholder = "Type username here"
-              onChangeText = {(text) => this.setState({username: text})}
-             />
+              <View style = {styles.form}>
+                <TextInput
+                  ref={input => { this.usernameField = input }}
+                  style = {styles.textInput}
+                  placeholder = "Username"
+                  onChangeText = {(text) => this.setState({username: text})}
+                 />
 
-            <TextInput
-              ref={input => { this.passwordField = input }}
-              style = {{ height: 40, width: 250, borderColor: 'black', backgroundColor: 'gray', borderWidth: 1 }}
-              placeholder = "Type password here"
-              secureTextEntry = {true}
-              onChangeText = {(text) => this.setState({password: text})}
-             />
+                <TextInput
+                  ref={input => { this.passwordField = input }}
+                  style = {styles.textInput}
+                  placeholder = "Password"
+                  secureTextEntry = {true}
+                  onChangeText = {(text) => this.setState({password: text})}
+                 />
 
-             <Button
-              title="login"
-              onPress = {() => this._login()}
-              />
+                 <TouchableOpacity
+                      activeOpacity = {0.8}
+                      onPress = {() => this._login()}
+                      style = {[styles.LoginButtonStyle, {backgroundColor: "#3badff"}]}
+                >
+                    <Text style = {styles.appButtonText}>Login</Text>
+                </TouchableOpacity>
+              </View>
+
           </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#50a3a2",
+        alignItems: "center",
+        justifyContent: "space-evenly"
+    },
+    form: {
+        flex: 0.25,
+        justifyContent: "space-between",
+        width: "75%"
+    },
+    InputButtonForm: {
+        flex: 0.2,
+        justifyContent: "space-between",
+        width: "75%"
+    },
+    textInput: {
+        height: 40,
+        borderColor: 'black',
+        backgroundColor: 'white',
+        borderWidth: 1,
+        justifyContent: "space-between"
+    },
+    LoginButtonStyle: {
+        marginTop:5,
+        paddingTop:5,
+        paddingBottom:5,
+        marginLeft:50,
+        marginRight:50,
+        backgroundColor:'#3badff',
+        borderRadius:5,
+        borderWidth: 1,
+        borderColor: '#000000'
+    },
+    appButtonText: {
+        fontSize: 15,
+        color: "#fff",
+        alignSelf: "center",
+        textTransform: "uppercase"
+    }
+});
