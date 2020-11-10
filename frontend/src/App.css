@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 .App {
   text-align: center;
 }
@@ -66,7 +67,7 @@ form{
 	position: relative;
 	z-index: 2;
 }
-input{
+#loginName #loginPassword{
 	display: block;
 	appearance: none;
 	outline: 0;
@@ -83,7 +84,10 @@ input{
 	transition-duration: 0.25s;
 	font-weight: 300;
 }
-input:hover{
+#loginName:hover{
+	background-color: fade(white, 40%);
+}
+#loginPassword:hover{
 	background-color: fade(white, 40%);
 }
 		
@@ -109,3 +113,33 @@ input:focus{
 	background-color: #3C7A7A;
 	color:white;
 }
+
+::-webkit-input-placeholder { /* WebKit browsers */
+		font-family: 'Source Sans Pro', sans-serif;
+		color:    white;
+		font-weight: 300;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		font-family: 'Source Sans Pro', sans-serif;
+		 color:    white;
+		 opacity:  1;
+		font-weight: 300;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+		font-family: 'Source Sans Pro', sans-serif;
+		 color:    white;
+		 opacity:  1;
+		font-weight: 300;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10+ */
+		font-family: 'Source Sans Pro', sans-serif;
+		 color:    white;
+		font-weight: 300;
+	}
+
+::placeholder {
+	font-family: 'Source Sans Pro', sans-serif;
+	color:    white;
+	font-weight: 300;
+}
+
