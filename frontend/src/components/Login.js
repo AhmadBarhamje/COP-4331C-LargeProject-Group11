@@ -49,13 +49,13 @@ function Login()
     return(
 	<div class="wrapper">
         <div id="loginDiv">
-            <span id="inner-title">PLEASE LOG IN</span><br />
+            <span id="inner-title">Welcome</span><br />
 	    <form onSubmit={doLogin}>
             <input type="text" id="loginName" placeholder="Username"
                 ref={(c) => loginName = c} /><br />
             <input type="password" id="loginPassword" placeholder="Password"
                 ref={(c) => loginPassword = c} /><br />
-            <input type="submit" id="loginButton" className="buttons" value = "Do It"
+            <input type="submit" id="loginButton" className="buttons" value = "Log in"
             onClick={doLogin} />
             </form>
             <span id="loginResult">{message}</span>
