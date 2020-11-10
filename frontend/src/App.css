@@ -39,7 +39,6 @@
 }
 
 .wrapper{	
-	
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -67,7 +66,7 @@ form{
 	position: relative;
 	z-index: 2;
 }
-#loginName #loginPassword{
+input{
 	display: block;
 	appearance: none;
 	outline: 0;
@@ -84,10 +83,7 @@ form{
 	transition-duration: 0.25s;
 	font-weight: 300;
 }
-#loginName:hover{
-	background-color: fade(white, 40%);
-}
-#loginPassword:hover{
+input:hover{
 	background-color: fade(white, 40%);
 }
 		
