@@ -1,37 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Button, Text } from 'react-native';
-//import ArrowButton from '../components/ArrowButton';
 import Card from './Card';
 import Header from './Header';
 
-export default function SchedulePage() {
+export class SchedulePage extends Component {
+  constructor(props) {
+      super(props)
+  }
 
-  let d = new Date();
-  const weekday = new Array(7);
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
-
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-  
-  const date = 
-  {
-     day: weekday[d.getDay()],
-     month: monthNames[d.getMonth()],
-     date: new Date().getDate(),
-  };
-
-  const addCard = (name, startTime, endTime) => {
+  addCard(name, startTime, endTime) {
     return <Card name={name} start={startTime} end={endTime}></Card>
   };
 
-  return (
+  render() {
+    return (
     <View style={style.pageStyle}>
       <Header>
       </Header>
@@ -45,11 +27,25 @@ export default function SchedulePage() {
         <Card name={larry.name} start={larry.start} end={larry.end}/>
         <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
         <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
-        
+
       </ScrollView>
     </View>
-  );
+    )}
 }
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+const d = new Date();
+
+const date =
+{
+     day: weekday[d.getDay()],
+     month: monthNames[d.getMonth()],
+     date: new Date().getDate(),
+};
 
 const style = StyleSheet.create({
   pageStyle: {
