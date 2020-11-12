@@ -18,7 +18,7 @@ const App: () => React$Node = () => {
         <Stack.Screen
             name = "Home"
             component = {Login}
-            options={{title: 'Welcome!'}}
+            options={{title: 'Welcome'}}
         />
 
         <Stack.Screen
@@ -26,7 +26,6 @@ const App: () => React$Node = () => {
             component = {Register}
             options={{title: 'Register'}}
         />
-
 
         <Stack.Screen
             name = "Dashboard"

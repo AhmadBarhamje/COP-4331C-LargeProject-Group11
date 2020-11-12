@@ -31,11 +31,15 @@ export class Register extends Component {
 
     invalidEmail() {
         if(!this.state.email) return true
-        return false
+        console.log(this.state.email)
+        var regexPattern = /\S+@\S+\.\S+/;
+        return !regexPattern.test(this.state.email);
     }
 
     _register() {
         console.log("register")
+        Keyboard.dismiss();
+
         if(!this.state.firstName) {
             Alert.alert("Please enter a first name.")
             return
@@ -56,6 +60,26 @@ export class Register extends Component {
             Alert.alert("Please enter a valid password.")
             return
         }
+
+        const signUpData = {
+            userName: this.state.username,
+            password: this.state.password,
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName
+        };
+
+
+        axios.post(`https://cop4331-group11-large.herokuapp.com/api/auth/signup`, signUpData)
+         .then(res => {
+            console.log(res.data)
+
+            console.log("Account created. Check your email to verify your account.")
+            this.props.navigation.navigate("Home")
+
+         }).catch((error) => {
+            Alert.alert(error.response.data.error)
+         })
     }
 
     render() {

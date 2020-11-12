@@ -47,9 +47,11 @@ export class Login extends Component {
             this.state.username = undefined;
             this.state.password = undefined;
 
-            if(res.data.id < 0) {
-                console.log("invalid username/password")
+            if(res.data.id == -1) {
                 Alert.alert("Invalid username/password")
+            }
+            else if(res.data.id == -2) {
+                Alert.alert("Account not verified.")
             }
             else {
                 this.props.navigation.navigate("Dashboard", {
@@ -60,7 +62,6 @@ export class Login extends Component {
                     userName: res.data.userName
                  })
             }
-
           })
     }
 
@@ -99,6 +100,7 @@ export class Login extends Component {
                         placeholder="Enter Password"
                         placeholderTextColor="#8b9cb5"
                         keyboardType="default"
+                        autoCapitalize="none"
                         onSubmitEditing={Keyboard.dismiss}
                         blurOnSubmit={false}
                         secureTextEntry={true}
@@ -118,7 +120,13 @@ export class Login extends Component {
                       style={styles.registerTextStyle}
                       onPress={() => this.props.navigation.navigate("Register")}
                       >
-                      New Here? Register!
+                      New here? Register!
+                    </Text>
+                    <Text
+                      style={styles.registerTextStyle}
+//                      onPress={() => this.props.navigation.navigate("Register")}
+                      >
+                      Forgot password? Click here!
                     </Text>
                   </KeyboardAvoidingView>
                 </View>
