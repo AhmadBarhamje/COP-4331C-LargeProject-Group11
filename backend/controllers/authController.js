@@ -136,7 +136,7 @@ exports.logout = async (req, res) => {
         //delete the refresh token saved in database:
         const { userId } = req.body;
         await Token.deleteMany({userId: userId});
-        return res.status(200).json({ success: "User logged out!" });
+        return res.status(200).json({ success: true });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: "Internal Server Error!" });
@@ -148,7 +148,7 @@ exports.forgotpass = async (req, res) => {
         const { userName, email } = req.body;
         var user = await User.findOne( {userName: userName, email: email} );
         if (!user) {
-            return res.status(200).json( {error: ""} )
+            return res.status(200).json( {success: true, error: ""} )
         } else {
             tempPassword = generator.generate({numbers: true, strict: true});
             console.log(`Temporary password ${tempPassword}`);
@@ -156,7 +156,7 @@ exports.forgotpass = async (req, res) => {
             await user.save();
 
             emailer.forgotPasswordEmail(user.email, tempPassword);
-            return res.status(200).json( {error: ""} )
+            return res.status(200).json( {success: true, error: ""} )
         }
     } catch (error) {
         console.error(error);
@@ -173,9 +173,9 @@ exports.changepass = async (req, res, next) => {
         if (valid) {
             user.password = newPassword;
             await user.save();
-            return res.status(200).json({error: ""});
+            return res.status(200).json({success: true, error: ""});
         } else {
-            return res.status(200).json({error: "Old password is incorrect"})
+            return res.status(200).json({success: false, error: "Old password is incorrect"})
         }
     } catch (error) {
         console.error(error);

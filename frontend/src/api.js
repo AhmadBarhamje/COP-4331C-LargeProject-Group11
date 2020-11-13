@@ -64,6 +64,12 @@ const api = {
     },
     protected: () => {
         return axios.get(`${url}/protected`);
+    },
+    forgotpass: (body) => {
+        return axios.post(`${url}/auth/forgotpass`, body);
+    },
+    changepass: (body) => {
+        return axios.post(`${url}/auth/changepass`, body);
     }
 };
 
