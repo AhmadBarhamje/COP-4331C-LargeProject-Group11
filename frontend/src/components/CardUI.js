@@ -74,7 +74,7 @@ function CardUI()
     return(
       <div class="wrapper fadeIn first">
         <div id="cardUIDiv">
-            </br></br>
+            <br /><br />
             <input type="text" id="searchText" class="fadeIn second" placeholder="Card To Search For"
                 ref={(c) => search = c} />
             <button type="button" id="searchCardButton" class="buttons fadeIn third"
