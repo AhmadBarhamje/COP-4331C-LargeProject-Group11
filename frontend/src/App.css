@@ -98,7 +98,7 @@ a {
 .topbanner{
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background-color: #fff;
   height: 60px;
   width: 100%;
   max-width: 1500px;
