@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const emailer = require('./emailer')
 const {ACCESS_TOKEN_SECRET, ACCESS_TOKEN_LIFE, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_LIFE} = process.env;
+var generator = require('generate-password');
 
 exports.signup = async (req, res) => {
     try {
@@ -134,7 +135,6 @@ exports.logout = async (req, res) => {
     try {
         //delete the refresh token saved in database:
         const { userId } = req.body;
-        console.log(userId);
         await Token.deleteMany({userId: userId});
         return res.status(200).json({ success: "User logged out!" });
     } catch (error) {
@@ -142,3 +142,43 @@ exports.logout = async (req, res) => {
         return res.status(500).json({ error: "Internal Server Error!" });
     }
 };
+
+exports.forgotpass = async (req, res) => {
+    try {
+        const { userName, email } = req.body;
+        var user = await User.findOne( {userName: userName, email: email} );
+        if (!user) {
+            return res.status(200).json( {error: ""} )
+        } else {
+            tempPassword = generator.generate({numbers: true, strict: true});
+            console.log(`Temporary password ${tempPassword}`);
+            user.password = tempPassword;
+            await user.save();
+
+            emailer.forgotPasswordEmail(user.email, tempPassword);
+            return res.status(200).json( {error: ""} )
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error!" })
+    }
+}
+
+exports.changepass = async (req, res, next) => {
+    try {
+        let {id, userName} = req.user;
+        const {password, newPassword} = req.body;
+        var user = await User.findOne({ _id: id });
+        let valid = await bcrypt.compare(password, user.password);
+        if (valid) {
+            user.password = newPassword;
+            await user.save();
+            return res.status(200).json({error: ""});
+        } else {
+            return res.status(200).json({error: "Old password is incorrect"})
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error!" });
+    }
+}
