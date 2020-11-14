@@ -1,39 +1,63 @@
 const mongoose = require('mongoose')
-
-const timeSlotSchema = new mongoose.Schema({
-    users: {type:[String], default: [], required:true},
-    numPeople: {type:Number, default: 0, required:true},
-    _id: false,
-    id: false
-});
+const Avail = require('./availability.model')
 
 const scheduleSchema = new mongoose.Schema({
+    name: {type: String, required: true},
     ownerId: {type: String, default:"testDefault", required: true},
     memberList: {type: Array, default: [], required: true},
     totalAvailability: {
-        sun: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        mon: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        tue: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        wed: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        thu: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        fri: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
-        sat: {type:[timeSlotSchema], default: new Array(96).fill(() => ({})), required:true},
+        sun: {type:[[String]], default: new Array(96).fill([]), required:true},
+        mon: {type:[[String]], default: new Array(96).fill([]), required:true},
+        tue: {type:[[String]], default: new Array(96).fill([]), required:true},
+        wed: {type:[[String]], default: new Array(96).fill([]), required:true},
+        thu: {type:[[String]], default: new Array(96).fill([]), required:true},
+        fri: {type:[[String]], default: new Array(96).fill([]), required:true},
+        sat: {type:[[String]], default: new Array(96).fill([]), required:true},
     }
 })
 
 
+scheduleSchema.methods = {
+    addMember: async function(user) {
+        try {
+            let updateSchedule = this.totalAvailability.toJSON();
+            let userAvailability = await Avail.findOne({userName: user});
+            let userSchedule = userAvailability.availability.toJSON();
+
+            for (var day in userSchedule) {
+                for (var i = 0; i < 96; i++) {
+                    if (userSchedule[day][i]) {
+                        updateSchedule[day][i].push(user);
+                    }
+                }
+            }
+            this.totalAvailability = updateSchedule;
+            this.memberList.push(user);
+            this.save();
+            return;
+        } catch(error) {
+            console.error(error);
+            return;
+        }
+    },
+    removeMember: async function(user) {
+        try {
+            let updateSchedule = this.totalAvailability.toJSON();
+            
+            for (var day in updateSchedule) {
+                for (var i = 0; i < 96; i++) {
+                    updateSchedule[day][i] = updateSchedule[day][i].filter(item => item !== user);
+                }
+            }
+            this.totalAvailability = updateSchedule; 
+            this.memberList = this.memberList.filter(item => item !== user);
+            this.save();
+            return;
+        } catch(error) {
+            console.error(error);
+            return;
+        }
+    }
+}
+
 module.exports = mongoose.model("Schedule", scheduleSchema);
-
-
-// sun: [{
-//     people: {type:[String], default: [], required:true},
-//     numPeople: {type:Number, default:0, required:true}
-// }],
-
-// sun: {type: Array, default: new Array(96).fill(0), required:true},
-// mon: {type: Array, default: new Array(96).fill(0), required:true},
-// tue: {type: Array, default: new Array(96).fill(0), required:true},
-// wed: {type: Array, default: new Array(96).fill(0), required:true},
-// thu: {type: Array, default: new Array(96).fill(0), required:true},
-// fri: {type: Array, default: new Array(96).fill(0), required:true},
-// sat: {type: Array, default: new Array(96).fill(0), required:true},
