@@ -33,7 +33,7 @@ scheduleSchema.methods = {
             }
             this.totalAvailability = updateSchedule;
             this.memberList.push(user);
-            this.save();
+            await this.save();
             return;
         } catch(error) {
             console.error(error);
@@ -43,7 +43,7 @@ scheduleSchema.methods = {
     removeMember: async function(user) {
         try {
             let updateSchedule = this.totalAvailability.toJSON();
-            
+
             for (var day in updateSchedule) {
                 for (var i = 0; i < 96; i++) {
                     updateSchedule[day][i] = updateSchedule[day][i].filter(item => item !== user);
@@ -51,7 +51,7 @@ scheduleSchema.methods = {
             }
             this.totalAvailability = updateSchedule; 
             this.memberList = this.memberList.filter(item => item !== user);
-            this.save();
+            await this.save();
             return;
         } catch(error) {
             console.error(error);
