@@ -96,7 +96,7 @@ a {
 }
 
 .topbanner{
-  background-color: #ffffff;
+  background-color: red;
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   height: 60px;
