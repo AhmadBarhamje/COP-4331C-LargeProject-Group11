@@ -38,6 +38,12 @@
   }
 }
 
+a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
 #inner-title {
   border-bottom: 2px solid #5fbae9;
   text-align: center;
@@ -48,8 +54,6 @@
   margin: 40px 8px 10px 8px; 
   color: black;
 }
-
-
 
 /* STRUCTURE */
 
@@ -63,7 +67,7 @@
   padding: 20px;
 }
 
-#loginDiv {
+#loginDiv{
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
@@ -76,6 +80,34 @@
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
+#cardUIDiv{
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 95%;
+  height:400px;
+  max-width: 1300px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.topbanner{
+  background: #fff;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  height: 60px;
+  width: 100%;
+  max-width: 1500px;
+  position: relative;
+  padding-left:10px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: left;
+}
 
 #formFooter {
   background-color: #f6f6f6;
@@ -87,14 +119,9 @@
 }
 
 
-
-
-
-
-
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type=button], input[type=submit], input[type=reset],.buttons {
   background-color: #56baed;
   border: none;
   color: white;
@@ -116,17 +143,24 @@ input[type=button], input[type=submit], input[type=reset]  {
   transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, .buttons:hover {
   background-color: #39ace7;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, .buttons:active  {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
+
+#logoutButton{
+  background-color: #fff;
+  color: black;
+  padding:15px 40px;
+  margin-left:60%;
+  }
 
 input[type=text], input[type=password] {
   background-color: #f6f6f6;
@@ -158,12 +192,6 @@ input[type=text]:placeholder {
   color: #cccccc;
 }
 
-a {
-  color: #92badd;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
-}
 
 
 /* ANIMATIONS */
