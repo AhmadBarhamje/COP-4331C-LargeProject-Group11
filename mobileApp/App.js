@@ -7,6 +7,7 @@ import {Login} from './src/Login.js';
 import {SchedulePage} from './src/SchedulerPage.js';
 import {Dashboard} from './src/Dashboard.js';
 import {Register} from './src/Register.js';
+import {ForgotPassword} from './src/ForgotPassword.js';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,12 @@ const App: () => React$Node = () => {
             name = "Dashboard"
             component = {Dashboard}
             options={{title: 'Dashboard'}}
+        />
+
+        <Stack.Screen
+            name = "ForgotPassword"
+            component = {ForgotPassword}
+            options={{title: 'Reset Password'}}
         />
 
       </Stack.Navigator>

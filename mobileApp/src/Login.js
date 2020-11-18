@@ -124,7 +124,7 @@ export class Login extends Component {
                     </Text>
                     <Text
                       style={styles.registerTextStyle}
-//                      onPress={() => this.props.navigation.navigate("Register")}
+                      onPress={() => this.props.navigation.navigate("ForgotPassword")}
                       >
                       Forgot password? Click here!
                     </Text>

@@ -24,8 +24,20 @@ export class Dashboard extends Component {
 
     }
 
-    _print() {
-        console.log(this.props)
+    _logout() {
+        const logoutData = {
+            userId: this.props.id
+        };
+
+        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/auth/logout`, logoutData)
+         .then(res => {
+            console.log(res.data)
+            this.props.navigation.navigate("Home")
+
+         }).catch((error) => {
+           Alert.alert(error.response.data.error)
+        })
+
     }
 
     render() {
@@ -38,8 +50,8 @@ export class Dashboard extends Component {
 
            <Text> Hello World! </Text>
            <Button
-             title="See parameters"
-             onPress = {() => this._print()}
+             title="Logout"
+             onPress = {() => this._logout()}
              />
           </View>
         )
