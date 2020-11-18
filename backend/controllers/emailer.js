@@ -6,12 +6,8 @@ var user = process.env.USER;
 var pass = process.env.PASS;
 const from = "scheduler@group11.com"
 
-
-async function sendRegistrationEmail(to, code){
-    const subject = "Activate your account"
-
-    // Create a transporter
-    let transporter = nodemailer.createTransport({
+function createTransporter() {
+    return nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
@@ -19,6 +15,12 @@ async function sendRegistrationEmail(to, code){
             pass: pass,
         },
     });
+}
+exports.sendRegistrationEmail = async function sendRegistrationEmail(to, code){
+    const subject = "Activate your account"
+
+    // Create a transporter
+    let transporter = createTransporter();
 
     let html = buildRegistrationHTML(code);
     let plainText = "Verify your email using this link " + buildURL(code);
@@ -53,5 +55,20 @@ function buildURL(code) {
     }
 }
 
+exports.forgotPasswordEmail = async function forgotPasswordEmail(to, tempPassword) {
+    const subject = "Scheduler Temporary Password"
 
-module.exports.sendRegistrationEmail = sendRegistrationEmail;
+    let transporter = createTransporter();
+
+    let plainText = "Here's your temporary password: " + tempPassword;
+
+    let mailStatus = await transporter.sendMail({
+        from: from,
+        to: to,
+        subject: subject,
+        text: plainText
+    });
+
+    console.log(`Message send: ${mailStatus.messageId}`);
+    return;
+}
