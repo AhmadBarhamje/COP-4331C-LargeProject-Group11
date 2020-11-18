@@ -23,6 +23,10 @@ function Login()
             {
                 setMessage('User/Password combination incorrect');
             }
+            else if (res.data.id === -2)
+            {
+                setMessage('Account not verified')
+            }
             else
             {
                 var user = {id:res.data.id,
@@ -47,18 +51,24 @@ function Login()
 
 
     return(
+	<div class="wrapper fadeInDown">
         <div id="loginDiv">
-            <form onSubmit={doLogin}>
-            <span id="inner-title">PLEASE LOG IN</span><br />
-            <input type="text" id="loginName" placeholder="Username"
+            <span id="inner-title">Welcome</span><br />
+	    <form onSubmit={doLogin}>
+            <input type="text" id="loginName" class="fadeIn second" placeholder="Username"
                 ref={(c) => loginName = c} /><br />
-            <input type="password" id="loginPassword" placeholder="Password"
+            <input type="password" class="fadeIn third" id="loginPassword" placeholder="Password"
                 ref={(c) => loginPassword = c} /><br />
-            <input type="submit" id="loginButton" className="buttons" value = "Do It"
+            <input type="submit" id="loginButton" className="buttons" value = "Log in"
             onClick={doLogin} />
             </form>
             <span id="loginResult">{message}</span>
+        <div id="formFooter">
+               <a class="underlineHover">Forgot Password?</a>
+    	</div>
+
         </div>
+	</div>
     );
 };
 

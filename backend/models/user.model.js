@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     userName: {type: String, required: true},
-    active: {type: Boolean, default: false}
+    active: {type: Boolean, default: false},
+    activationCode: {type: Number}
 })
 
 userSchema.methods = {
@@ -35,7 +36,7 @@ userSchema.methods = {
                 {user: {_id, userName}},
                 REFRESH_TOKEN_SECRET, {expiresIn: REFRESH_TOKEN_LIFE}
             );
-
+            await Token.deleteMany({userId: _id});
             await new Token({token: refreshToken, userId: _id}).save();
             return refreshToken;
         } catch(e) {
