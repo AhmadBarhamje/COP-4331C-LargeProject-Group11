@@ -8,27 +8,7 @@ function ForgotPassword()
     
     const [message,setMessage] = useState('');
 
-    const doForgotpass = async event => 
-    {
-        event.preventDefault();
-
-        var obj = {userName:loginName.value,
-                   email:userEmail.value};
-        let res
-        try
-        {    
-            res = await api.login(obj); 
-            console.log(res);
-
-		var user = {userName:res.data.userName
-			    email:res.data.email}
- }
-        }
-        catch(e)
-        {
-            alert(e.toString());
-            return;
-        }    
+  
     };
 
 
