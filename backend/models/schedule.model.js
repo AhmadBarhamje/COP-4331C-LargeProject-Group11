@@ -60,6 +60,29 @@ scheduleSchema.methods = {
             console.error(error);
             return;
         }
+    },
+    updateAvailability: async function(user) {
+        try {
+            let updateSchedule = this.totalAvailability.toJSON();
+            let userAvailability = await Avail.findOne({userName: user});
+            let userSchedule = userAvailability.availability.toJSON();
+
+            for (var day in updateSchedule) {
+                for (var i = 0; i < THIRTY_MIN_INTERVAL; i++) {
+                    if (updateSchedule[day][i].includes(user) && !userSchedule[day][i]) { // User is already here, but no longer available
+                        updateSchedule[day][i] = updateSchedule[day][i].filter(item => item !== user);
+                    } else if (!updateSchedule[day][i].includes(user) && userSchedule[day][i]) { // User is not here, and is now available
+                        updateSchedule[day][i].push(user);
+                    }
+                }
+            }
+            this.totalAvailability = updateSchedule;
+            await this.save();
+            return;
+        } catch(error) {
+            console.error(error);
+            return;
+        }
     }
 }
 

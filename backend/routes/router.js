@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const AuthController = require('../controllers/authController')
 const Middleware = require('../middleware/verification')
+const ScheduleController = require('../controllers/scheduleController')
 
 router.post('/auth/signup', AuthController.signup);
 
