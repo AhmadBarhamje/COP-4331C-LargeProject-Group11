@@ -66,7 +66,7 @@ function Login()
             </form>
             <span id="loginResult">{message}</span>
         <div id="formFooter">
-            <span class="a underlineHover" onClick={doForgetPassword}>Forgot Password?<span/>
+            <span class="a underlineHover" onClick={doForgetPassword}>Forgot Password?</span>
     	</div>
 
         </div>
