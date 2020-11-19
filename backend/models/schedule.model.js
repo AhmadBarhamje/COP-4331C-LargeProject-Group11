@@ -1,21 +1,24 @@
 const mongoose = require('mongoose')
 const Avail = require('./availability.model')
 
+const HOURLY_INTERVAL = 24;
+const THIRTY_MIN_INTERVAL = 48;
+const FIFTEEN_MIN_INTERVAL = 96;
+
 const scheduleSchema = new mongoose.Schema({
     name: {type: String, required: true},
     ownerId: {type: String, default:"testDefault", required: true},
     memberList: {type: Array, default: [], required: true},
     totalAvailability: {
-        sun: {type:[[String]], default: new Array(96).fill([]), required:true},
-        mon: {type:[[String]], default: new Array(96).fill([]), required:true},
-        tue: {type:[[String]], default: new Array(96).fill([]), required:true},
-        wed: {type:[[String]], default: new Array(96).fill([]), required:true},
-        thu: {type:[[String]], default: new Array(96).fill([]), required:true},
-        fri: {type:[[String]], default: new Array(96).fill([]), required:true},
-        sat: {type:[[String]], default: new Array(96).fill([]), required:true},
+        sun: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        mon: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        tue: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        wed: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        thu: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        fri: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
+        sat: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
     }
 })
-
 
 scheduleSchema.methods = {
     addMember: async function(user) {
@@ -25,7 +28,7 @@ scheduleSchema.methods = {
             let userSchedule = userAvailability.availability.toJSON();
 
             for (var day in userSchedule) {
-                for (var i = 0; i < 96; i++) {
+                for (var i = 0; i < THIRTY_MIN_INTERVAL; i++) {
                     if (userSchedule[day][i]) {
                         updateSchedule[day][i].push(user);
                     }
@@ -45,7 +48,7 @@ scheduleSchema.methods = {
             let updateSchedule = this.totalAvailability.toJSON();
 
             for (var day in updateSchedule) {
-                for (var i = 0; i < 96; i++) {
+                for (var i = 0; i < THIRTY_MIN_INTERVAL; i++) {
                     updateSchedule[day][i] = updateSchedule[day][i].filter(item => item !== user);
                 }
             }
