@@ -11,7 +11,7 @@ function Login()
     const doForgetPassword = async event =>
     {
         event.preventDefault();
-        window.location.href = '/cards';
+        window.location.href = '/password';
     }
 
     const doLogin = async event => 
