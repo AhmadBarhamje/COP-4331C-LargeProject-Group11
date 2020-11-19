@@ -64,6 +64,7 @@ function Login()
             </form>
             <span id="loginResult">{message}</span>
         <div id="formFooter">
+               <a class="underlineHover">Register</a><br>
                <a class="underlineHover">Forgot Password?</a>
     	</div>
 
