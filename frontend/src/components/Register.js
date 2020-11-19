@@ -19,13 +19,13 @@ function Register()
         {    
             res = await api.register(obj); 
             console.log(res);
-            if( res.data.id === -1 )
+            if( res.data.id === -3 )
             {
                 setMessage('Username already taken');
             }
-            else if (res.data.id === -2)
+            else if (res.data.id === -4)
             {
-                setMessage('Passwords do not match')
+                setMessage('Email is in use')
             }
             else
             {
