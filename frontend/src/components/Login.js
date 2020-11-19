@@ -8,6 +8,12 @@ function Login()
 
     const [message,setMessage] = useState('');
 
+    const doForgetPassword = async event =>
+    {
+        event.preventDefault();
+        window.location.href = '/cards';
+    }
+
     const doLogin = async event => 
     {
         event.preventDefault();
@@ -60,7 +66,8 @@ function Login()
             </form>
             <span id="loginResult">{message}</span>
         <div id="formFooter">
-               <a class="underlineHover">Forgot Password?</a>
+               <input class="underlineHover a" value="Forgot Password?" 
+             onClick={doForgetPassword}/>
     	</div>
 
         </div>
