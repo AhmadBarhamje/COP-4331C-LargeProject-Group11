@@ -7,7 +7,7 @@ const FIFTEEN_MIN_INTERVAL = 96;
 
 const scheduleSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    ownerId: {type: String, default:"testDefault", required: true},
+    owner: {type: String, default:"testDefault", required: true},
     memberList: {type: Array, default: [], required: true},
     totalAvailability: {
         sun: {type:[[String]], default: new Array(THIRTY_MIN_INTERVAL).fill([]), required:true},
@@ -34,9 +34,11 @@ scheduleSchema.methods = {
                     }
                 }
             }
+            
             this.totalAvailability = updateSchedule;
             this.memberList.push(user);
             await this.save();
+            await userAvailability.addSchedule(this.name);
             return;
         } catch(error) {
             console.error(error);
@@ -46,7 +48,7 @@ scheduleSchema.methods = {
     removeMember: async function(user) {
         try {
             let updateSchedule = this.totalAvailability.toJSON();
-
+            let userAvailability = await Avail.findOne({userName: user});
             for (var day in updateSchedule) {
                 for (var i = 0; i < THIRTY_MIN_INTERVAL; i++) {
                     updateSchedule[day][i] = updateSchedule[day][i].filter(item => item !== user);
@@ -55,6 +57,7 @@ scheduleSchema.methods = {
             this.totalAvailability = updateSchedule; 
             this.memberList = this.memberList.filter(item => item !== user);
             await this.save();
+            await userAvailability.removeSchedule(this.name);
             return;
         } catch(error) {
             console.error(error);
