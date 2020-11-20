@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const AuthController = require('../controllers/authController')
 const Middleware = require('../middleware/verification')
+const ScheduleController = require('../controllers/scheduleController')
 
 router.post('/auth/signup', AuthController.signup);
 
@@ -25,5 +26,21 @@ router.get('/protected', Middleware.verify, (req, res) => {
 })
 
 router.post('/auth/changepass', Middleware.verify, AuthController.changepass);
+
+router.get('/getAvailability', Middleware.verify, ScheduleController.getAvailability);
+
+router.post('/setAvailability', Middleware.verify, ScheduleController.setAvailability);
+
+// Get the names of schedules that a user is in
+router.get('/getAllSchedules', Middleware.verify, ScheduleController.getAllSchedules); 
+
+// Get a single schedule with it's data
+router.get('/getSchedule', Middleware.verify, ScheduleController.getSchedule);
+
+router.post('/createSchedule', Middleware.verify, ScheduleController.createSchedule);
+
+router.post('/addMember', Middleware.verify, ScheduleController.addMember);
+
+router.delete('/removeMember', Middleware.verify, ScheduleController.removeMember);
 
 module.exports = router;
