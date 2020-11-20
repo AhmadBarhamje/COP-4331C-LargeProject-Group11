@@ -17,12 +17,9 @@ function ForgotPassword()
         <div id="loginDiv">
             <span id="inner-title">password recovery</span><br />
 	    <form onSubmit={doForgotpass}>
-            <input type="text" id="loginName" class="fadeIn second" placeholder="Username"/><br />
-                ref={(c) => loginName = c} /><br />                    
-	    <input type="text" id="loginName" class="fadeIn second" placeholder="Type in your email"/><br />
-                ref={(c) => userEmail = c} /><br />            
-	   <input type="submit" id="loginButton" className="buttons" value = "Continue"
-            onClick={doForgotpass} />
+            <input type="text" id="loginName" class="fadeIn second" placeholder="Username"/><br />                   
+	    <input type="text" id="loginName" class="fadeIn second" placeholder="Type in your email"/><br />          
+	    <input type="submit" id="loginButton" className="buttons" value = "Continue"/>
             </form>
 
         </div>
