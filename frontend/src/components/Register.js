@@ -13,7 +13,7 @@ function Register()
             event.preventDefault();
             window.location.href = '/';
     }
-    
+
     const doRegister = async event => 
     {
         event.preventDefault();
@@ -61,12 +61,13 @@ function Register()
         <div id="loginDiv">
             <span id="inner-title">Register</span><br />
             <form onSubmit={doRegister}> 
-                <input type="text" id="loginName" class="fadeIn second" placeholder="Username"/><br />
+                <input type="text" id="firstName" class="fadeIn second" placeholder="First Name"/><br />
+                <input type="text" id="lastName" class="fadeIn second" placeholder="Last name"/><br />
+                <input type="text" id="username" class="fadeIn second" placeholder="Username"/><br />
                 <input type="email" class="fadeIn third" id="email" placeholder="Email"/><br />
                 <input type="password" class="fadeIn third" id="loginPassword" placeholder="Password"/><br />
                 <input type="password" class="fadeIn third" id="loginPassword" placeholder="Confirm Password"/><br />
-                <input type="submit" id="loginButton" className="buttons" value = "Register"
-                onClick={doRegister} />
+                <input type="submit" id="registerButton" className="buttons" value = "Register" onClick={doRegister} />
             </form>
             <span id="loginResult"></span>
             <div id="formFooter">
