@@ -71,7 +71,7 @@ function Login()
             <span id="loginResult">{message}</span>
         <div id="formFooter">
                <a class="underlineHover" onClick={goRegisterPage}>Register</a> <br />
-               <a class="underlineHover" onClick={doForgetPassword}>Forgot Password?</a>
+               <a class="underlineHover" >Forgot Password?</a>
     	</div>
 
         </div>
