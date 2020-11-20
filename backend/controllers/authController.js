@@ -1,10 +1,12 @@
 const User = require('../models/user.model')
 const Token = require('../models/token.model')
+const Avail = require('../models/availability.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const emailer = require('./emailer')
 const {ACCESS_TOKEN_SECRET, ACCESS_TOKEN_LIFE, REFRESH_TOKEN_SECRET, REFRESH_TOKEN_LIFE} = process.env;
 var generator = require('generate-password');
+const { use } = require('../routes/router')
 
 exports.signup = async (req, res) => {
     try {
@@ -55,6 +57,7 @@ exports.activate = async (req, res) => {
             return res.status(404).json({ error: "Cannot find user"})
         } else {
             await user.updateOne({$unset: {activationCode: ""}, active: true});
+            await new Avail({userId: user._id, userName: user.userName}).save();
             return res.status(200).redirect(process.env.ORIGIN);
         }
     } catch (e) {
