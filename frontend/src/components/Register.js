@@ -8,6 +8,12 @@ function Register()
 
     const [message,setMessage] = useState('');
 
+    const goLoginPage = async event =>
+    {
+            event.preventDefault();
+            window.location.href = '/';
+    }
+    
     const doRegister = async event => 
     {
         event.preventDefault();
@@ -39,7 +45,7 @@ function Register()
 
                 console.log(localStorage.getItem('accessToken'));
                 setMessage('');
-                window.location.href = '/cards';
+                window.location.href = '/';
             }
         }
         catch(e)
@@ -64,7 +70,7 @@ function Register()
             </form>
             <span id="loginResult"></span>
             <div id="formFooter">
-                <a class="underlineHover">Already Registered?</a>
+                <a class="underlineHover" onClick={goLoginPage}>Already Registered?</a>
 
             </div>
 
