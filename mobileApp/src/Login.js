@@ -12,6 +12,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableHighlight,
   StatusBar,
 } from 'react-native';
 import axios from 'axios';
@@ -65,6 +66,9 @@ export class Login extends Component {
           })
     }
 
+    testPress() {
+        console.log("hi")
+    }
 
     render() {
         return (

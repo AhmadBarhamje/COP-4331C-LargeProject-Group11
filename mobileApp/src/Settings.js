@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   Alert,
   Button,
+  KeyboardAvoidingView,
   SafeAreaView,
   StyleSheet,
   ScrollView,
@@ -15,7 +16,7 @@ import {
 import axios from 'axios';
 
 
-export class Dashboard extends Component {
+export class Settings extends Component {
     constructor(props) {
         super(props)
 
@@ -25,10 +26,27 @@ export class Dashboard extends Component {
 
     }
 
+    logout() {
+        const logoutData = {
+            userId: this.props.route.params.id
+        };
 
+        console.log(logoutData);
 
-    navigate_to_settings() {
-        this.props.navigation.navigate("Settings", {
+        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/auth/logout`, logoutData)
+         .then(res => {
+            console.log(res.data)
+            this.props.navigation.navigate("Home")
+
+         }).catch((error) => {
+            console.log("um");
+//           Alert.alert(error.response.data.error)
+        })
+
+    }
+
+    changePassword() {
+        this.props.navigation.navigate("ChangePassword", {
             accessToken: this.props.route.params.accessToken,
             id: this.props.route.params.id,
             firstName: this.props.route.params.firstName,
@@ -38,7 +56,7 @@ export class Dashboard extends Component {
     }
 
     testFunc() {
-        console.log("!!")
+        console.log("!")
         console.log(this.props)
     }
 
@@ -52,28 +70,21 @@ export class Dashboard extends Component {
                    justifyContent: 'center',
                    alignContent: 'center',
                  }}>
-                   <View style={styles.SectionStyle}>
-                       <TouchableOpacity
-                         style={[styles.buttonStyle2, {}]}
-                         onPress = {() => this.testFunc()}>
-                        <Text style={styles.buttonTextStyle}> View Schedule </Text>
-                       </TouchableOpacity>
-                       <TouchableOpacity
-                        style={styles.buttonStyle2}
-                        onPress = {() => this.testFunc()}>
-                       <Text style={styles.buttonTextStyle}> Update Your Schedule </Text>
+                 <View style={styles.SectionStyle}>
+                    <TouchableOpacity
+                        style={[styles.buttonStyle2, {backgroundColor: '#2229f2'}]}
+                        onPress = {() => this.changePassword()}
+                        >
+                       <Text style={styles.buttonTextStyle}> Change Password </Text>
                       </TouchableOpacity>
-                      <TouchableOpacity
-                        style={[styles.buttonStyle2]}
-                        onPress = {() => this.testFunc()}>
-                       <Text style={styles.buttonTextStyle}> Add/Remove Users </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                       style={[styles.buttonStyle2, {backgroundColor: '#7d7d7d'}]}
-                       onPress = {() => this.navigate_to_settings()}>
-                      <Text style={styles.buttonTextStyle}> Settings </Text>
+                    <TouchableOpacity
+                       style={[styles.buttonStyle2, {backgroundColor: '#cf1919'}]}
+                       onPress = {() => this.logout()}
+                       >
+                      <Text style={styles.buttonTextStyle}> Logout </Text>
                      </TouchableOpacity>
-                   </View>
+
+                 </View>
 
                 </ScrollView>
           </View>
