@@ -11,7 +11,11 @@ exports.setAvailability = async (req, res) => {
         currentAvailability.availability = newAvailability;
         await currentAvailability.save();
 
-        // TODO: Loop through all schedules user is in to propogate change
+        // Propogate the updated schedule to all other schedules the user's in
+        let updateList = currentAvailability.schedules;
+        for (var schedName in updateList) {
+            await Schedule.findOne({name: schedName}).updateAvailability(userName);
+        }
 
         return res.status(200).json({success: true});
     } catch(error) {
@@ -66,8 +70,7 @@ exports.createSchedule = async (req, res) => {
 
 exports.getSchedule = async (req, res) => {
     try {
-        let {name} = req.body;
-
+        let name = req.query.name;
         let schedule = await Schedule.findOne({name:name});
         return res.status(200).json({name: name, owner: schedule.owner, members: schedule.memberList, schedule: schedule.totalAvailability})
     } catch(error) {
@@ -89,7 +92,7 @@ exports.addMember = async (req, res) => {
         if (!affectedUserDoc.active) {
             return res.status(403).json({success: false, error: "User account not verified"});
         }
-        
+
         await schedule.addMember(affectedUser);
         return res.status(200).json({success:true});
     } catch(error) {
