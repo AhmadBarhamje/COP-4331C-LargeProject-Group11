@@ -35,21 +35,15 @@ function Register()
         let res
         try
         {    
-            res = await api.signup(obj); 
-            console.log(res);
-            if(registerEmail == ' ' || registerUsername.value == ' ' || registerPassword.value == '' || registerPasswordCheck.value == '' || firstName.value == '' || lastName.value == '')
+            //checks
+            if(document.getElementById("registerForm").registerEmail.value == '' || document.getElementById("registerForm").registerUsername.value == '' || 
+            document.getElementById("registerForm").registerPassword.value == '' || document.getElementById("registerForm").firstName.value == '' || 
+            document.getElementById("registerForm").registerPasswordCheck.value == '' || document.getElementById("registerForm").lastName.value == '')
             {
                 setMessage('Please fill out all the fields')
             }
-            if( res.data.id === -3 )
-            {
-                setMessage('Username already taken');
-            }
-            else if (res.data.id === -4)
-            {
-                setMessage('Email is in use')
-            }
-            else if(regex.test(registerEmail) != true)
+            
+            else if(regex.test(registerEmail.value) != true)
             {
                 setMessage('Email is not in the correct format');
             }
@@ -57,11 +51,27 @@ function Register()
             {
                 setMessage('Passwords do not match')
             }
+
+            
+            //api call
             else
             {
-                setMessage('Check email to activate account')
-                document.getElementById("registerForm").reset(); 
-                
+                res = await api.signup(obj); 
+                console.log(res);
+                if( res.data.id === -3 )
+                {
+                    setMessage('Username already taken');
+                }
+                else if (res.data.id === -4)
+                {
+                    setMessage('Email is in use')
+                }
+                else
+                {
+                    setMessage('Check email to activate account')
+                    document.getElementById("registerForm").reset(); 
+                    
+                }
             }
         }
         catch(e)
