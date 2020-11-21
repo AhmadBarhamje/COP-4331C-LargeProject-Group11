@@ -9,6 +9,7 @@ function Register()
     var registerEmail;
     var firstName;
     var lastName;
+    var regex = /\S+@\S+\.\S+/;
 
     const [message,setMessage] = useState('');
 
@@ -36,6 +37,10 @@ function Register()
         {    
             res = await api.signup(obj); 
             console.log(res);
+            if(registerEmail == ' ' || registerUsername.value == ' ' || registerPassword.value == '' || registerPasswordCheck.value == '' || firstName.value == '' || lastName.value == '')
+            {
+                setMessage('Please fill out all the fields')
+            }
             if( res.data.id === -3 )
             {
                 setMessage('Username already taken');
@@ -44,6 +49,10 @@ function Register()
             {
                 setMessage('Email is in use')
             }
+            else if(regex.test(registerEmail) != true)
+            {
+                setMessage('Email is not in the correct format');
+            }
             else if (registerPassword.value != registerPasswordCheck.value)
             {
                 setMessage('Passwords do not match')
@@ -51,7 +60,8 @@ function Register()
             else
             {
                 setMessage('Check email to activate account')
-            
+                document.getElementById("registerForm").reset(); 
+                
             }
         }
         catch(e)
@@ -66,7 +76,7 @@ function Register()
     <div class="wrapper fadeInDown">
         <div id="loginDiv">
             <span id="inner-title">Register</span><br />
-            <form onSubmit={doRegister}> 
+            <form id="registerForm" onSubmit={doRegister}> 
                 <input type="text" id="firstName" class="fadeIn second" placeholder="First Name" ref={(c) => firstName = c} required/><br />
                 <input type="text" id="lastName" class="fadeIn second" placeholder="Last name" ref={(c) => lastName = c} /><br />
                 <input type="text" id="registerUsername" class="fadeIn second" placeholder="Username" ref={(c) => registerUsername = c} required/><br />
