@@ -34,7 +34,7 @@ function Register()
         let res
         try
         {    
-            res = await api.register(obj); 
+            res = await api.signup(obj); 
             console.log(res);
             if( res.data.id === -3 )
             {
@@ -44,7 +44,7 @@ function Register()
             {
                 setMessage('Email is in use')
             }
-            else if (!registerPassword.localeCompare(registerPasswordCheck))
+            else if (registerPassword != registerPasswordCheck)
             {
                 setMessage('Passwords do not match')
             }
@@ -67,12 +67,12 @@ function Register()
         <div id="loginDiv">
             <span id="inner-title">Register</span><br />
             <form onSubmit={doRegister}> 
-                <input type="text" id="firstName" class="fadeIn second" placeholder="First Name" ref={(c) => firstName = c} /><br />
+                <input type="text" id="firstName" class="fadeIn second" placeholder="First Name" ref={(c) => firstName = c} required/><br />
                 <input type="text" id="lastName" class="fadeIn second" placeholder="Last name" ref={(c) => lastName = c} /><br />
-                <input type="text" id="registerUsername" class="fadeIn second" placeholder="Username" ref={(c) => registerUsername = c} /><br />
-                <input type="email"  id="registerEmail" class="fadeIn third" placeholder="Email" ref={(c) => registerEmail = c} /><br />
-                <input type="password"  id="registerPassword" class="fadeIn third" placeholder="Password" ref={(c) => registerPassword = c} /><br />
-                <input type="password"  id="registerPasswordCheck" class="fadeIn third" placeholder="Confirm Password" ref={(c) => registerPasswordCheck = c} /><br />
+                <input type="text" id="registerUsername" class="fadeIn second" placeholder="Username" ref={(c) => registerUsername = c} required/><br />
+                <input type="email"  id="registerEmail" class="fadeIn third" placeholder="Email" ref={(c) => registerEmail = c} required/><br />
+                <input type="password"  id="registerPassword" class="fadeIn third" placeholder="Password" ref={(c) => registerPassword = c} required/><br />
+                <input type="password"  id="registerPasswordCheck" class="fadeIn third" placeholder="Confirm Password" ref={(c) => registerPasswordCheck = c} required/><br />
                 <input type="submit" id="registerButton" className="buttons" value = "Register" onClick={doRegister} />
             </form>
             <span id="registerResult">{message}</span>
