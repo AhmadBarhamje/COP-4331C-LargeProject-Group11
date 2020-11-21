@@ -44,7 +44,7 @@ function Register()
             {
                 setMessage('Email is in use')
             }
-            else if (registerPassword != registerPasswordCheck)
+            else if (registerPassword.value != registerPasswordCheck.value)
             {
                 setMessage('Passwords do not match')
             }
