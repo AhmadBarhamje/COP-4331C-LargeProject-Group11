@@ -3,7 +3,7 @@ import api from '../api';
 
 function Register()
 {
-    var registerName;
+    var registerUsername;
     var registerPassword;
 
     const [message,setMessage] = useState('');
@@ -18,8 +18,15 @@ function Register()
     {
         event.preventDefault();
 
-        var obj = {userName:registerName.value,
-                   password:registerPassword.value};
+        var obj = 
+        {
+            userName:registerUsername.value,
+            password:registerPassword.value,
+            email:registerEmail.value,
+            firstName:firstName.value,
+            lastName:lastName.value           
+        
+        };
         let res
         try
         {    
@@ -38,13 +45,16 @@ function Register()
                 var user = {id:res.data.id,
                             firstName:res.data.firstName,
                             lastName:res.data.lastName,
-                            userName:res.data.userName}
-                localStorage.setItem('user_data', JSON.stringify(user));
-                var accessToken = JSON.stringify(res.data.accessToken);
-                localStorage.setItem('accessToken', accessToken)
+                            userName:res.data.userName,
+                            email:res.data.email,
+                            password:res.data.password
+                        }
+                //localStorage.setItem('user_data', JSON.stringify(user));
+                //var accessToken = JSON.stringify(res.data.accessToken);
+                //localStorage.setItem('accessToken', accessToken)
 
-                console.log(localStorage.getItem('accessToken'));
-                setMessage('');
+                //console.log(localStorage.getItem('accessToken'));
+                //setMessage('');
                 window.location.href = '/';
             }
         }
@@ -63,13 +73,13 @@ function Register()
             <form onSubmit={doRegister}> 
                 <input type="text" id="firstName" class="fadeIn second" placeholder="First Name"/><br />
                 <input type="text" id="lastName" class="fadeIn second" placeholder="Last name"/><br />
-                <input type="text" id="username" class="fadeIn second" placeholder="Username"/><br />
-                <input type="email" class="fadeIn third" id="email" placeholder="Email"/><br />
-                <input type="password" class="fadeIn third" id="loginPassword" placeholder="Password"/><br />
-                <input type="password" class="fadeIn third" id="loginPassword" placeholder="Confirm Password"/><br />
+                <input type="text" id="registerUsername" class="fadeIn second" placeholder="Username"/><br />
+                <input type="email"  id="registerEmail" class="fadeIn third" placeholder="Email"/><br />
+                <input type="password"  id="registerPassword" class="fadeIn third" placeholder="Password"/><br />
+                <input type="password"  id="registerPassword" class="fadeIn third" placeholder="Confirm Password"/><br />
                 <input type="submit" id="registerButton" className="buttons" value = "Register" onClick={doRegister} />
             </form>
-            <span id="loginResult"></span>
+            <span id="registerResult"></span>
             <div id="formFooter">
                 <a class="underlineHover" onClick={goLoginPage}>Already Registered?</a>
 
