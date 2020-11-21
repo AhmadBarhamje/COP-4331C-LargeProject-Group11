@@ -5,6 +5,9 @@ function Register()
 {
     var registerUsername;
     var registerPassword;
+    var registerEmail;
+    var firstName;
+    var lastName;
 
     const [message,setMessage] = useState('');
 
@@ -42,20 +45,8 @@ function Register()
             }
             else
             {
-                var user = {id:res.data.id,
-                            firstName:res.data.firstName,
-                            lastName:res.data.lastName,
-                            userName:res.data.userName,
-                            email:res.data.email,
-                            password:res.data.password
-                        }
-                //localStorage.setItem('user_data', JSON.stringify(user));
-                //var accessToken = JSON.stringify(res.data.accessToken);
-                //localStorage.setItem('accessToken', accessToken)
-
-                //console.log(localStorage.getItem('accessToken'));
-                //setMessage('');
-                window.location.href = '/';
+                setMessage('Check email to activate account')
+            
             }
         }
         catch(e)
