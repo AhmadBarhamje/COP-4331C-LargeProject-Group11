@@ -50,11 +50,11 @@ export default function SubmitSchedule() {
     const submit = () => {
         // TODO submit this scheduleArray to the database
         console.log(scheduleArray);
-        axios.post(`https://cop4331-group11-large.herokuapp.com/api/`, scheduleArray)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+        // axios.post(`https://cop4331-group11-large.herokuapp.com/api/`, scheduleArray)
+        //     .then(res => {
+        //         console.log(res);
+        //         console.log(res.data);
+        //     })
     }
 
     let sunday = [

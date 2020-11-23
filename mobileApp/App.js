@@ -5,6 +5,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Login} from './src/Login.js';
 import {SchedulePage} from './src/SchedulerPage.js';
+import {SubmitAvailabilityPage} from './src/SubmitAvailabilityPage';
 import {Dashboard} from './src/Dashboard.js';
 import {Register} from './src/Register.js';
 import {ForgotPassword} from './src/ForgotPassword.js';
@@ -52,6 +53,18 @@ const App: () => React$Node = () => {
             name = "ChangePassword"
             component = {ChangePassword}
             options={{title: 'Change your password'}}
+        />
+        
+        <Stack.Screen
+            name = "SchedulePage"
+            component = {SchedulePage}
+            options={{title: 'Schedule'}}
+        />
+        
+        <Stack.Screen
+            name = "SubmitAvailabilityPage"
+            component = {SubmitAvailabilityPage}
+            options={{title: 'Enter Your Weekly Availability'}}
         />
 
 
