@@ -42,6 +42,18 @@ export class Dashboard extends Component {
         console.log(this.props)
     }
 
+    navigate_to_SchedulePage() {
+        this.props.navigation.navigate("SchedulePage", {
+
+        })
+    }
+    
+    navigate_to_SubmitSchedulePage() {
+        this.props.navigation.navigate("SubmitAvailabilityPage", {
+
+        })
+    }
+
     render() {
         return (
             <View style={styles.mainBody}>
@@ -55,12 +67,12 @@ export class Dashboard extends Component {
                    <View style={styles.SectionStyle}>
                        <TouchableOpacity
                          style={[styles.buttonStyle2, {}]}
-                         onPress = {() => this.testFunc()}>
+                         onPress = {() => this.navigate_to_SchedulePage()}>
                         <Text style={styles.buttonTextStyle}> View Schedule </Text>
                        </TouchableOpacity>
                        <TouchableOpacity
                         style={styles.buttonStyle2}
-                        onPress = {() => this.testFunc()}>
+                        onPress = {() => this.navigate_to_SubmitSchedulePage()}>
                        <Text style={styles.buttonTextStyle}> Update Your Schedule </Text>
                       </TouchableOpacity>
                       <TouchableOpacity

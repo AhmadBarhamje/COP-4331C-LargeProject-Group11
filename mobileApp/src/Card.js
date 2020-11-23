@@ -4,12 +4,6 @@ import { StyleSheet, Dimensions, Text, TouchableNativeFeedback, Alert, View, Saf
 
 export default function Card(props) {
 
-  const Shawn = {
-    name: "Shawn McChargue",
-    start: "7:00",
-    end: "11:00",
-  }
-
   return (
     <View style={style.card}> 
       <View style={style.side}/>
