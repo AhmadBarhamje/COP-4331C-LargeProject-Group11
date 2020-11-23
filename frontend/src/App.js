@@ -7,13 +7,10 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-
 import LoginPage from "./pages/LoginPage";
 import CardPage from "./pages/CardPage";
-import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
-
 
 function App() {
   return (
@@ -22,11 +19,8 @@ function App() {
         <Route path='/' exact>
           <LoginPage />
         </Route>
-        <Route path="/register" exact>
-          <RegisterPage/>
-        </Route>
         <Route path='/forgotpassword' exact>
-          <ForgotPasswordPage/>
+          <ForgotPasswordPage />
         </Route>
         <Route path='/changepassword' exact>
           <ChangePasswordPage />
