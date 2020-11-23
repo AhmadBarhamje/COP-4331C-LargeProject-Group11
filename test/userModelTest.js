@@ -38,6 +38,7 @@ describe('User Model', function() {
     });
   });
 
+  // This test doesn't do anything yet
   describe('Create Refresh Token', function() {
     it('Creates valid refresh token', async function() {
       var user = createNewUser();
