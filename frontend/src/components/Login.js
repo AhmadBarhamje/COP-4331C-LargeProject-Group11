@@ -9,7 +9,7 @@ function Login() {
 
   const doForgetPassword = async (event) => {
     event.preventDefault();
-    window.location.href = "/password";
+    window.location.href = "/forgotpassword";
   };
 
   const doLogin = async (event) => {
