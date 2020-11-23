@@ -14,12 +14,12 @@ exports.signup = async (req, res) => {
         var user
         user = await User.findOne({ userName: req.body.userName });
         if (user) {
-            return res.status(400).json({ error: "Username taken." });
+            return res.status(200).json({ error: "Username taken." , id: -3 });
         } 
         // check if email taken
         user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "Email in use." });
+            return res.status(200).json({ error: "Email in use." , id: -4 });
         }
 
         //create new user and generate a pair of tokens and send
