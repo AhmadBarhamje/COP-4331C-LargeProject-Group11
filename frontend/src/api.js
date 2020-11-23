@@ -45,27 +45,28 @@ axios.interceptors.response.use(
 );
 
 const api = {
-  signup: (body) => {
-    return axios.post(`${url}/auth/signup`, body);
-  },
-  changePassword: (body) => {
-    return axios.post(`${url}/auth/changepass`, body);
-  },
-  forgotPassword: (body) => {
+    signup: (body) => {
+        return axios.post(`${url}/auth/signup`, body);
+    },
+    login: (body) => {
+        return axios.post(`${url}/auth/login`, body);
+    },
+    refresh: () => {
+        return axios.get(`${url}/auth/refresh`);
+    },
+    logout: (body) => {
+        return axios.delete(`${url}/auth/logout`, {data: body});
+    },
+    protected: () => {
+        return axios.get(`${url}/protected`);
+    },
+    forgotPassword: (body) => {
     return axios.post(`${url}/auth/forgotpass`, body);
   },
-  login: (body) => {
-    return axios.post(`${url}/auth/login`, body);
+    changePassword: (body) => {
+    return axios.post(`${url}/auth/changepass`, body);
   },
-  refresh: () => {
-    return axios.get(`${url}/auth/refresh`);
-  },
-  logout: (body) => {
-    return axios.delete(`${url}/auth/logout`, { data: body });
-  },
-  protected: () => {
-    return axios.get(`${url}/protected`);
-  },
+
 };
 
 export default api;
