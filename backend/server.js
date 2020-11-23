@@ -7,7 +7,16 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const api = require("./routes/router");
-
+const {
+  MONGODB_URI,
+  USER,
+  PASS,
+  ACCESS_TOKEN_SECRET,
+  ACCESS_TOKEN_LIFE,
+  REFRESH_TOKEN_SECRET,
+  REFRESH_TOKEN_LIFE,
+  ORIGIN,
+} = require("./config");
 // Express setup
 const app = express();
 app.use(cors({origin: process.env.ORIGIN, credentials: true}));
