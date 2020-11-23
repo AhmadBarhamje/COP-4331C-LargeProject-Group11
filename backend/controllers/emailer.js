@@ -55,7 +55,6 @@ function buildURL(code) {
     }
 }
 
-
 exports.forgotPasswordEmail = async function forgotPasswordEmail(to, tempPassword) {
     const subject = "Scheduler Temporary Password"
 
