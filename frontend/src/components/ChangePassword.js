@@ -9,8 +9,6 @@ function ChangePassword() {
   const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setnewPassword] = useState("");
-
-
   //onSubmit={doForgotpass}
   const changePasswordCaller = async (event) => {
     event.preventDefault();
@@ -64,9 +62,6 @@ function ChangePassword() {
             value='Reset Password'
           />
         </form>
-        <div id="formFooter">
-         <span class="a underlineHover">Back to Dashboard<span/>
-    	</div>
       </div>
     </div>
   );
