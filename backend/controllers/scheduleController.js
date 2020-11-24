@@ -12,11 +12,11 @@ exports.setAvailability = async (req, res) => {
         await currentAvailability.save();
 
         // Propogate the updated schedule to all other schedules the user's in
-        let updateList = currentAvailability.schedules;
-        for (var schedName in updateList) {
-            let temp = await Schedule.findOne({name: schedName});
-            await temp.updateAvailability(userName);
-        }
+        // let updateList = currentAvailability.schedules;
+        // for (var schedName in updateList) {
+        //     let temp = await Schedule.findOne({name: schedName});
+        //     await temp.updateAvailability(userName);
+        // }
 
         return res.status(200).json({success: true});
     } catch(error) {
