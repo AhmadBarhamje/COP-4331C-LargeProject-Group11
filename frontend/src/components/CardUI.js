@@ -75,6 +75,16 @@ function CardUI() {
           {" "}
           Change Password
         </span>
+        <span
+          id="menu"
+          class='fadeIn third'>
+          view schedule
+        </span>
+        <span
+          id="menu"
+          class='fadeIn third'>
+          Update availability
+        </span>
       </div>
     </div>
   );
