@@ -32,7 +32,6 @@ exports.setAvailability = async (req, res) => {
 exports.getAvailability = async (req, res) => {
     try {
         let {id, userName} = req.user;
-        console.log(id + ' ' + userName);
         let currentAvailability = await Availability.findOne({userId:id});
         return res.status(200).json({schedules: currentAvailability.schedules,
                                     availability: currentAvailability.availability});
@@ -112,10 +111,37 @@ exports.removeMember = async (req, res) => {
         let {name, affectedUser} = req.body;
         let schedule = await Schedule.findOne({name: name});
         if (schedule.owner !== userName) {
-            return res.status(403).json({Success: false, error: "Only the owner can add/remove"});
+            return res.status(403).json({success: false, error: "Only the owner can add/remove"});
         }
         await schedule.removeMember(affectedUser);
         return res.status(200).json({success:true});
+    } catch(error) {
+        console.error(error);
+        return res.status(500).json({ e: "Internal Server Error!" });
+    }
+}
+
+exports.deleteSchedule = async (req, res) => {
+    try {
+        let {id, userName} = req.user;
+        let {name} = req.body;
+        let schedule = await Schedule.findOne({name: name});
+        if (schedule.owner !== userName) {
+            return res.status(403).json({success: false, error: "Only the owner can delete a schedule"});
+        }
+        // For each member in the schedule, remove the schedule from their list
+        let members = schedule.memberList;
+        console.log(members);
+        for (var index in members) {
+            console.log(members[index]);
+            let mem = await Availability.findOne({userName: members[index]});
+            if (mem !== null) {
+                await mem.removeSchedule(schedule.name);
+            }
+        }
+        // After all are removed, delete the document
+        await Schedule.deleteOne({name: schedule.name});
+        return res.status(200).json({success: true});
     } catch(error) {
         console.error(error);
         return res.status(500).json({ e: "Internal Server Error!" });

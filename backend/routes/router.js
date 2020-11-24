@@ -43,4 +43,6 @@ router.post('/addMember', Middleware.verify, ScheduleController.addMember);
 
 router.delete('/removeMember', Middleware.verify, ScheduleController.removeMember);
 
+router.delete('/deleteSchedule', Middleware.verify, ScheduleController.deleteSchedule);
+
 module.exports = router;
