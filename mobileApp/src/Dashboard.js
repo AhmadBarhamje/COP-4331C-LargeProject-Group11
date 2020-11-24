@@ -44,13 +44,21 @@ export class Dashboard extends Component {
 
     navigate_to_SchedulePage() {
         this.props.navigation.navigate("SchedulePage", {
-
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
         })
     }
     
     navigate_to_SubmitSchedulePage() {
         this.props.navigation.navigate("SubmitAvailabilityPage", {
-
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
         })
     }
 
