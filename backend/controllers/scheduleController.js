@@ -14,7 +14,8 @@ exports.setAvailability = async (req, res) => {
         // Propogate the updated schedule to all other schedules the user's in
         let updateList = currentAvailability.schedules;
         for (var schedName in updateList) {
-            await Schedule.findOne({name: schedName}).updateAvailability(userName);
+            let temp = await Schedule.findOne({name: schedName});
+            await temp.updateAvailability(userName);
         }
 
         return res.status(200).json({success: true});
