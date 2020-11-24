@@ -58,10 +58,12 @@ exports.activate = async (req, res) => {
         } else {
             await user.updateOne({$unset: {activationCode: ""}, active: true});
             await new Avail({userId: user._id, userName: user.userName}).save();
+            console.log(`Created new availability redirecting to: ${process.env.ORIGIN}`);
             return res.status(200).redirect(process.env.ORIGIN);
         }
     } catch (e) {
         console.error(e);
+        console.log(`Failed activation redirecting to: ${process.env.ORIGIN}`);
         return res.status(500).redirect(process.env.ORIGIN);
     }
 }
