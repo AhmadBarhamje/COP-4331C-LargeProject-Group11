@@ -177,9 +177,15 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 
 #logoutButton{
   background-color: #ffffff;
+  color:black;
   padding:15px 40px;
   margin-left:60%;
   }
+
+#logoutButton:hover{
+  background-color:#4BA3E9;
+  color:#f6f6f6
+}
 
 input[type=text], input[type=password] {
   background-color: #f6f6f6;
