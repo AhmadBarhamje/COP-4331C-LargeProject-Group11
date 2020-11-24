@@ -11,7 +11,7 @@ exports.setAvailability = async (req, res) => {
         currentAvailability.availability = newAvailability;
         await currentAvailability.save();
 
-        // Propogate the updated schedule to all other schedules the user's in
+        // Propagate the updated schedule to all other schedules the user's in
         let updateList = currentAvailability.schedules;
         console.log(updateList);
         for (var index in updateList) {
