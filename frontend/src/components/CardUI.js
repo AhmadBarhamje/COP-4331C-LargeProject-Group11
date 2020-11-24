@@ -64,10 +64,9 @@ function CardUI() {
       <div id='cardUIDiv'>
         <br />
         <br />
-        <button
-          type='button'
-          id='ChangepasswordButton'
-          class='buttons fadeIn third'
+        <span
+          id='menu'
+          class='fadeIn third'
           onClick={(e) => {
             e.preventDefault();
             window.location = "/changepassword";
@@ -75,7 +74,7 @@ function CardUI() {
         >
           {" "}
           Change Password
-        </button>
+        </span>
       </div>
     </div>
   );

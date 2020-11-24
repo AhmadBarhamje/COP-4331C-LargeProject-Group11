@@ -39,13 +39,31 @@
 }
 
 
-.a{
+
+
+#menu{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color: black;
+}
+a {
   color: #92badd;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
 }
-#inner-title {
+.a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+#inner-title, #menu:hover {
   border-bottom: 2px solid #5fbae9;
   text-align: center;
   font-size: 16px;
@@ -81,6 +99,7 @@
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
+
 #cardUIDiv{
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
@@ -97,9 +116,9 @@
 }
 
 .topbanner{
-  background: #fff;
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
+  background-color: #fff;
   height: 60px;
   width: 100%;
   max-width: 1500px;
@@ -157,8 +176,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 }
 
 #logoutButton{
-  background-color: #fff;
-  color: black;
+  background-color: #ffffff;
   padding:15px 40px;
   margin-left:60%;
   }
