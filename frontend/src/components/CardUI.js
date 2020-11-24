@@ -85,6 +85,8 @@ function CardUI() {
           class='fadeIn third'>
           Update availability
         </span>
+       <div class="jelly-container">
+        </div>
       </div>
     </div>
   );
