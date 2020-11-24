@@ -57,13 +57,13 @@ function ChangePassword() {
           <input
             type='submit'
             id='loginButton'
-            onClick={changePasswordCaller}
             className='buttons'
             value='Reset Password'
+            onClick={changePasswordCaller}
           />
         </form>
         <div id="formFooter">
-         <span class="a underlineHover">Back to Dashboard<span/>
+         <span class="a underlineHover">Back to Dashboard</span>
     	</div>
       </div>
     </div>
