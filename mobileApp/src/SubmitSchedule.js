@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState, useRef} from 'react';
-import { View, StyleSheet, Text, ScrollView, Button, TouchableOpacity } from 'react-native';
+import React, { useState, useRef, Component} from 'react';
+import { View, StyleSheet, Text, ScrollView, Button, TouchableOpacity, Alert } from 'react-native';
 
 let updatedArray = {sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)};
 
@@ -46,18 +46,32 @@ export default function SubmitSchedule() {
         updatedArray = {sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)};
 
     }
+    const selectAll = () => {
+        myRefs.current.forEach(ref => 
+            ref.setNativeProps({style:{backgroundColor:'lime'}})
+        );
+
+        setScheduleArray({sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)});
+        updatedArray = {sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)};
+
+    }
 
     const submit = () => {
         // TODO submit this scheduleArray to the database
-        console.log(scheduleArray);
-        // axios.post(`https://cop4331-group11-large.herokuapp.com/api/`, scheduleArray)
-        //     .then(res => {
-        //         console.log(res);
-        //         console.log(res.data);
-        //     })
+        console.log("This is the scheduleArray: " + scheduleArray.sun);
+        let dbSubmit  = {newAvailability: scheduleArray};
+         axios.post(`https://cop4331-group11-large.herokuapp.com/api/setAvailability`, dbSubmit)
+             .then(res => {
+                 console.log("****************************************************************** " + res);
+                 console.log(res.data);
+             }).catch((error) => {
+                console.log(error)
+                console.log(error.response)
+                Alert.alert(error.response.data.error)
+             })
     }
 
-    let sunday = [
+    const sunday = [
         {id: 0},
         {id: 1},
         {id: 2},
@@ -107,7 +121,7 @@ export default function SubmitSchedule() {
         {id: 46},
         {id: 47},
     ];
-    let monday = [
+    const monday = [
         {id: 48},
         {id: 49},
         {id: 50},
@@ -157,7 +171,7 @@ export default function SubmitSchedule() {
         {id: 94},
         {id: 95},
     ];
-    let tuesday = [
+    const tuesday = [
         {id: 96},
         {id: 97},
         {id: 98},
@@ -207,7 +221,7 @@ export default function SubmitSchedule() {
         {id: 142},
         {id: 143},
     ];
-    let wednesday = [
+    const wednesday = [
         {id: 144},
         {id: 145},
         {id: 146},
@@ -257,7 +271,7 @@ export default function SubmitSchedule() {
         {id: 190},
         {id: 191},
     ];
-    let thursday = [
+    const thursday = [
         {id: 192},
         {id: 193},
         {id: 194},
@@ -307,7 +321,7 @@ export default function SubmitSchedule() {
         {id: 238},
         {id: 239},
     ];
-    let friday = [
+    const friday = [
         {id: 240},
         {id: 241},
         {id: 242},
@@ -357,7 +371,7 @@ export default function SubmitSchedule() {
         {id: 286},
         {id: 287},
     ];
-    let saturday = [
+    const saturday = [
         {id: 288},
         {id: 289},
         {id: 290},
@@ -533,11 +547,28 @@ export default function SubmitSchedule() {
     return (
         <View style={styles.CalendarDay}>
             <ScrollView style={styles.scrollStyle}>
-                <View style={styles.buttonSubmit}>
-                    <Button onPress={submit} title="Submit Schedule"/>
-                </View>
-                <View style={styles.buttonReset}>
-                    <Button onPress={resetColors} title="Reset"/>
+                <View style={styles.buttons}>
+                    <View>
+                        <TouchableOpacity onPress={submit}>
+                            <View style={styles.buttonSubmit}>
+                                <Text style={{fontWeight: 'bold'}}>Submit Schedule</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={resetColors}>
+                            <View style={styles.buttonReset}>
+                                <Text style={{fontWeight: 'bold'}}>Reset</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={selectAll}>
+                            <View style={styles.buttonReset}>
+                                <Text style={{fontWeight: 'bold'}}>Select All</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.days}>
                     <Text>{"S"}</Text>
@@ -656,12 +687,24 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
     },
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: "space-evenly",
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+
     buttonReset: {
-        flexDirection: 'column'
+        backgroundColor: 'lightskyblue',
+        padding: 10,
+        borderRadius: 10,
+        paddingLeft: 30,
+        paddingRight: 30
     },
     buttonSubmit: {
-        flexDirection: 'column',
-        backgroundColor: 'lime'
+        backgroundColor: 'lightskyblue',
+        padding: 10,
+        borderRadius: 10
     },
     times: {
         justifyContent: 'space-around',

@@ -2,10 +2,26 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Button, Text } from 'react-native';
 import Card from './Card';
 import Header from './Header';
+import axios from 'axios';
+import ArrowButton from './ArrowButton';
 
 export class SchedulePage extends Component {
   constructor(props) {
       super(props)
+
+      axios.interceptors.request.use((config) => {
+        config.headers['x-auth-token'] = JSON.stringify(this.props.route.params.accessToken);
+        config.headers['content-type'] = 'application/json; charset=utf-8';
+        return config;
+    },
+     (error) => {
+         Promise.reject(error);
+     });
+
+    axios.interceptors.response.use(response => {
+      console.log('Response:', JSON.stringify(response, null, 2))
+      return response
+    })
   }
 
   addCard(name, startTime, endTime) {
@@ -25,8 +41,8 @@ export class SchedulePage extends Component {
 }
 
   MonthAsString(monthIndex) {
-    var d = new Date();
-    var month = new Array();
+    let d = new Date();
+    let month = new Array();
     month[0] = "January";
     month[1] = "February";
     month[2] = "March";
@@ -44,7 +60,7 @@ export class SchedulePage extends Component {
   }
 
  DayAsString(dayIndex) {
-  var weekdays = new Array(7);
+  let weekdays = new Array(7);
   weekdays[0] = "Sunday";
   weekdays[1] = "Monday";
   weekdays[2] = "Tuesday";
@@ -56,10 +72,42 @@ export class SchedulePage extends Component {
   return weekdays[dayIndex];
 }
 
+
+ buildViewSchedule() {
+
+  let schedules = {};
+  let availability = {};
+
+  axios.get(`https://cop4331-group11-large.herokuapp.com/api/getAvailability`)
+       .then(res => {
+          // console.log("****************************************************************** " + res);
+          // console.log("***Test*** " + res.data.availability.sun);
+          availability = res.data.availability;
+          console.log("Inside: " + availability);
+
+       }).catch((error) => {
+          console.log(error)
+          console.log(error.response)
+          Alert.alert(error.response.data.error)
+       })
+
+       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@: " + availability);
+      // console.log("After: " + schedule.availability.sun);
+  // return schedule.map(item =>{
+  //  return(
+  //    <View key={item.id} style={styles.calendar}>
+  //    </View>
+  //  );
+  //})
+}
+
   render() {
     return (
     <View style={style.pageStyle}>
       <ScrollView>
+        <View style={style.button}>
+          <Button title="Get Schedule" onPress={this.buildViewSchedule}/>
+        </View>
         <Text style={style.text}>{this.getDates(new Date())[0]}</Text>
         <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
         <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
@@ -71,72 +119,21 @@ export class SchedulePage extends Component {
         <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         <Text style={style.text}>{this.getDates(new Date())[1]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         
         <Text style={style.text}>{this.getDates(new Date())[2]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         
         <Text style={style.text}>{this.getDates(new Date())[3]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         
         <Text style={style.text}>{this.getDates(new Date())[4]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         
         <Text style={style.text}>{this.getDates(new Date())[5]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         
         <Text style={style.text}>{this.getDates(new Date())[6]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
-
-        
-
       </ScrollView>
     </View>
     )}
@@ -151,12 +148,13 @@ const style = StyleSheet.create({
       alignItems: "center", // secondary axis
   },
   text:{
-    textAlign: "center",
+    textAlign: "left",
     flex: 1,
-    fontSize: 40,
+    fontSize: 30,
     color: "black",
     margin: 10,
-    backgroundColor: 'azure'
+    padding: 10,
+    backgroundColor: 'white'
   },
   button: {
     flexDirection: 'row',
