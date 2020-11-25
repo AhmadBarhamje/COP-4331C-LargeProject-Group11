@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Button, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, Button, Text, Alert } from 'react-native';
 import Card from './Card';
 import Header from './Header';
 import axios from 'axios';
@@ -8,6 +8,10 @@ import ArrowButton from './ArrowButton';
 export class SchedulePage extends Component {
   constructor(props) {
       super(props)
+
+      this.state = {
+        currentAvailability: {}
+      }
 
       axios.interceptors.request.use((config) => {
         config.headers['x-auth-token'] = JSON.stringify(this.props.route.params.accessToken);
@@ -72,18 +76,178 @@ export class SchedulePage extends Component {
   return weekdays[dayIndex];
 }
 
+convertArrayToTimeHelper(timeIndex) {
+  switch(timeIndex)
+  {
+    case 0:
+      startTime = "12:00 AM";
+      break;
+    case 1:
+      startTime = "12:30 AM";
+      break;
+    case 2:
+      startTime = "1:00 AM";
+      break;
+    case 3:
+      startTime = "1:30 AM";
+      break;
+    case 4:
+      startTime = "2:00 AM";
+      break;
+    case 5:
+      startTime = "2:30 AM";
+      break;
+    case 6:
+      startTime = "3:00 AM";
+      break;
+    case 7:
+      startTime = "3:30 AM";
+      break;
+    case 8:
+      startTime = "4:00 AM";
+      break;
+    case 9:
+      startTime = "4:30 AM";
+      break;
+    case 10:
+      startTime = "5:00 AM";
+      break;
+    case 11:
+      startTime = "5:30 AM";
+      break;
+    case 12:
+      startTime = "6:00 AM";
+      break;
+    case 13:
+      startTime = "6:30 AM";
+      break;
+    case 14:
+      startTime = "7:00 AM";
+      break;
+    case 15:
+      startTime = "7:30 AM";
+      break;
+    case 16:
+      startTime = "8:00 AM";
+      break;
+    case 17:
+      startTime = "8:30 AM";
+      break;
+    case 18:
+      startTime = "9:00 AM";
+      break;
+    case 19:
+      startTime = "9:30 AM";
+      break;
+    case 20:
+      startTime = "10:00 AM";
+      break;
+    case 21:
+      startTime = "10:30 AM";
+      break;
+    case 22:
+      startTime = "11:00 AM";
+      break;
+    case 23:
+      startTime = "11:30 AM";
+      break;
+    case 24:
+      startTime = "12:00 PM";
+      break;
+    case 25:
+      startTime = "1:00 PM";
+      break;
+    case 26:
+      startTime = "1:30 PM";
+      break;
+    case 27:
+      startTime = "2:00 PM";
+      break;
+    case 28:
+      startTime = "2:30 PM";
+      break;
+    case 29:
+      startTime = "3:00 PM";
+      break;
+    case 30:
+      startTime = "3:30 PM";
+      break;
+    case 31:
+      startTime = "4:00 PM";
+      break;
+    case 32:
+      startTime = "4:30 PM";
+      break;
+    case 33:
+      startTime = "5:00 PM";
+      break;
+    case 34:
+      startTime = "5:30 PM";
+      break;
+    case 35:
+      startTime = "6:00 PM";
+      break;
+    case 36:
+      startTime = "6:30 PM";
+      break;
+    case 37:
+      startTime = "7:00 PM";
+      break;
+    case 38:
+      startTime = "7:30 PM";
+      break;
+    case 39:
+      startTime = "8:00 PM";
+      break;
+    case 40:
+      startTime = "8:30 PM";
+      break;
+    case 41:
+      startTime = "9:00 PM";
+      break;
+    case 42:
+      startTime = "9:30 PM";
+      break;
+    case 43:
+      startTime = "10:00 PM";
+      break;
+    case 44:
+      startTime = "10:30 PM";
+      break;
+    case 45:
+      startTime = "11:00 PM";
+      break;
+    case 46:
+      startTime = "11:30 PM";
+  }
 
- buildViewSchedule() {
+  return timeIndex;
+}
 
-  let schedules = {};
-  let availability = {};
+ convertArrayToTime(startIndex, endIndex) {
+
+    let startTime = this.convertArrayToTimeHelper(startIndex);
+    let endTime = this.convertArrayToTimeHelper(endIndex);
+
+    return [startTime, endTime];
+    
+ }
+
+ /*buildViewSchedule() {
+
+  let schedules = [{id: 1},{id: 2}];
+  let availability = [{id: 1},{id: 2}];
+  let memberList = [];
 
   axios.get(`https://cop4331-group11-large.herokuapp.com/api/getAvailability`)
        .then(res => {
-          // console.log("****************************************************************** " + res);
-          // console.log("***Test*** " + res.data.availability.sun);
-          availability = res.data.availability;
-          console.log("Inside: " + availability);
+         // console.log("****************************************************************** " + res);
+         // console.log("***Test*** " + res.data);
+         // console.log("***Test Name*** " + res.data.availability.sun);
+          // memberList = res.data.members;
+         // this.setState({currentAvailability: res.data.availability});
+         // console.log("After: " + availability.sun);
+
 
        }).catch((error) => {
           console.log(error)
@@ -91,32 +255,42 @@ export class SchedulePage extends Component {
           Alert.alert(error.response.data.error)
        })
 
-       console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@: " + availability);
-      // console.log("After: " + schedule.availability.sun);
-  // return schedule.map(item =>{
-  //  return(
-  //    <View key={item.id} style={styles.calendar}>
-  //    </View>
-  //  );
-  //})
-}
+     // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@: " + availability);
+     // console.log("After: " + availability.sun);
+      
+      /*let start;
+      let startBool = false
+      let end;
+      for (let i = 0; i < 48; i++)
+      {
+        if (availability.sun[i] && !startBool)
+        {
+          start = i;
+          startBool = true;
+        }
+        if (startBool && !availability.sun[i])
+        {
+          end = i;
+          break;
+        }
+      }
+
+      let timeString = this.convertArrayToTime(start, end);
+      
+        return(
+          <View style={style.calendar}>
+            <Card name={"Shawn McChargue???"} start={timeString[0]} end={timeString[1]}/>
+          </View>
+        );
+  }*/
 
   render() {
     return (
     <View style={style.pageStyle}>
       <ScrollView>
         <View style={style.button}>
-          <Button title="Get Schedule" onPress={this.buildViewSchedule}/>
         </View>
         <Text style={style.text}>{this.getDates(new Date())[0]}</Text>
-        <Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
-        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
-        <Card name={sb.name} start={sb.start} end={sb.end}/>
-        <Card name={st.name} start={st.start} end={st.end}/>
-        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
-        <Card name={larry.name} start={larry.start} end={larry.end}/>
-        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
-        <Card name={patrick.name} start={patrick.start} end={patrick.end}/>
 
         <Text style={style.text}>{this.getDates(new Date())[1]}</Text>
 
@@ -137,6 +311,15 @@ export class SchedulePage extends Component {
       </ScrollView>
     </View>
     )}
+
+    /*<Card name={Shawn.name} start={Shawn.start} end={Shawn.end}/>
+        <Card name={Jon.name} start={Jon.start} end={Jon.end}/>
+        <Card name={sb.name} start={sb.start} end={sb.end}/>
+        <Card name={st.name} start={st.start} end={st.end}/>
+        <Card name={sandy.name} start={sandy.start} end={sandy.end}/>
+        <Card name={larry.name} start={larry.start} end={larry.end}/>
+        <Card name={krabs.name} start={krabs.start} end={krabs.end}/>
+        <Card name={patrick.name} start={patrick.start} end={patrick.end}/> */
 }
 
 const style = StyleSheet.create({

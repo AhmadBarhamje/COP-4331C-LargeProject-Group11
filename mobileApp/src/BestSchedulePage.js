@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React, { Component} from 'react';
-import { View, Text } from 'react-native';
-import SubmitSchedule from './SubmitSchedule.js';
+import BestSchedule from './BestSchedule.js';
 
 
-export class SubmitAvailabilityPage extends Component {
+export class BestSchedulePage extends Component {
     constructor(props) {
         super(props)
 
@@ -19,13 +18,13 @@ export class SubmitAvailabilityPage extends Component {
 
         axios.interceptors.response.use(response => {
           console.log('Response:', JSON.stringify(response, null, 2))
-          return response
+          return response;
         })
     }
 
     render(){
         return(
-            <SubmitSchedule/>
+            <BestSchedule/>
         )
     }
 }

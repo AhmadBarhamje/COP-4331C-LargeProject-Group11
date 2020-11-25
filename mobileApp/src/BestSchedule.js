@@ -1,73 +1,10 @@
 import axios from 'axios';
-import React, { useState, useRef, Component} from 'react';
-import { View, StyleSheet, Text, ScrollView, Button, TouchableOpacity, Alert } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 
-let updatedArray = {sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)};
+let bestSchedule =  {sun: Array(48).fill(0), mon: Array(48).fill(0), tue: Array(48).fill(0), wed: Array(48).fill(0), thu: Array(48).fill(0), fri: Array(48).fill(0), sat: Array(48).fill(3)};
 
-export default function SubmitSchedule() {
-
-    const [scheduleArray, setScheduleArray] = useState({sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)});
-    const myRefs = useRef([]);
-
-    const setScheduleArrayHelper = (day, timeSlot) => {
-            switch(day)
-            {
-                case 1:
-                    updatedArray.sun[timeSlot] = !(updatedArray.sun[timeSlot]);
-                    break;
-                case 2:
-                    updatedArray.mon[timeSlot] = !(updatedArray.mon[timeSlot]);
-                    break;
-                case 3:
-                    updatedArray.tue[timeSlot] = !(updatedArray.tue[timeSlot]);
-                    break;
-                case 4:
-                    updatedArray.wed[timeSlot] = !(updatedArray.wed[timeSlot]);
-                    break;
-                case 5:
-                    updatedArray.thu[timeSlot] = !(updatedArray.thu[timeSlot]);
-                    break;
-                case 6:
-                    updatedArray.fri[timeSlot] = !(updatedArray.fri[timeSlot]);
-                    break;
-                case 7:
-                    updatedArray.sat[timeSlot] = !(updatedArray.sat[timeSlot]);
-            }
-        setScheduleArray(updatedArray);
-
-    }
-
-    const resetColors = () => {
-        myRefs.current.forEach(ref => 
-            ref.setNativeProps({style:{backgroundColor:'white'}})
-        );
-
-        setScheduleArray({sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)});
-        updatedArray = {sun: Array(48).fill(false), mon: Array(48).fill(false), tue: Array(48).fill(false), wed: Array(48).fill(false), thu: Array(48).fill(false), fri: Array(48).fill(false), sat: Array(48).fill(false)};
-
-    }
-    const selectAll = () => {
-        myRefs.current.forEach(ref => 
-            ref.setNativeProps({style:{backgroundColor:'lime'}})
-        );
-
-        setScheduleArray({sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)});
-        updatedArray = {sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)};
-
-    }
-
-    const submit = () => {
-        // TODO submit this scheduleArray to the database
-        let dbSubmit  = {newAvailability: scheduleArray};
-         axios.post(`https://cop4331-group11-large.herokuapp.com/api/setAvailability`, dbSubmit)
-             .then(res => {
-                 console.log(res.data);
-             }).catch((error) => {
-                console.log(error)
-                console.log(error.response)
-                Alert.alert(error.response.data.error)
-             })
-    }
+export default function BestSchedule() {
 
     const sunday = [
         {id: 0},
@@ -420,154 +357,124 @@ export default function SubmitSchedule() {
         {id: 335},
     ];
 
+    
     const buildViewSunday = () => {
         return sunday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightSunday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewMonday = () => {
         return monday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightMonday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 48]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewTuesday = () => {
         return tuesday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightTuesday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 96]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewWednesday = () => {
         return wednesday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightWednesday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 144]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewThursday = () => {
         return thursday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightThursday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 192]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewFriday = () => {
         return friday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightFriday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 240]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
     const buildViewSaturday = () => {
         return saturday.map(item =>{
-          return(
-            <View key={item.id} style={styles.calendar}>
-                    <TouchableOpacity onPress={() => highlightSaturday(item.id)}>
-                        <View style={styles.line} key={item.id} ref={el => myRefs.current[item.id] = el}>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.intervals}/>
-            </View>
-          );
+            return(
+                <View key={item.id} style={styles.calendar}>
+                    <View style={{
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 288]),
+                        padding: 15,
+                        margin: 10,}}>
+                     </View>
+                </View>
+              );
         });
     }
 
-        const highlightSunday = (itemId) => {
-            setScheduleArrayHelper(1, itemId);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.sun[itemId] ? 'lime' : 'white'}});
-          }
-        const highlightMonday = (itemId) => {
-            setScheduleArrayHelper(2, itemId - 48);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.mon[itemId - 48] ? 'lime' : 'white'}});
-          }
-        const highlightTuesday = (itemId) => {
-            setScheduleArrayHelper(3, itemId - 96);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.tue[itemId - 96] ? 'lime' : 'white'}});
-          }
-        const highlightWednesday = (itemId) => {
-            setScheduleArrayHelper(4, itemId - 144);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.wed[itemId - 144] ? 'lime' : 'white'}});
-          }
-        const highlightThursday = (itemId) => {
-            setScheduleArrayHelper(5, itemId - 192);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.thu[itemId - 192] ? 'lime' : 'white'}});
-          }
-        const highlightFriday = (itemId) => {
-            setScheduleArrayHelper(6, itemId - 240);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.fri[itemId - 240] ? 'lime' : 'white'}});
-          }
-        const highlightSaturday = (itemId) => {
-            setScheduleArrayHelper(7, itemId - 288);
-            myRefs.current[itemId].setNativeProps({style: {backgroundColor: updatedArray.sat[itemId - 288] ? 'lime' : 'white'}});
-          }
-        
+    const calculateShade = (num) => {
+        let colval = "rgb(0, ";
+        let G;
+        if (num == 0)
+            G = 0;
+        else if(num == 1)
+        {
+            G = 80;
+        }
+        else
+        {
+            G = 80 + (num * 10);
+        }
+        let end = ", 0)";
+
+
+        if (G >= 250)
+            G = 250;
+
+        return colval + G + end;
+    }        
 
     return (
         <View style={styles.CalendarDay}>
             <ScrollView style={styles.scrollStyle}>
-                <View style={styles.buttons}>
-                    <View>
-                        <TouchableOpacity onPress={submit}>
-                            <View style={styles.buttonSubmit}>
-                                <Text style={{fontWeight: 'bold'}}>Submit Schedule</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity onPress={resetColors}>
-                            <View style={styles.buttonReset}>
-                                <Text style={{fontWeight: 'bold'}}>Reset</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity onPress={selectAll}>
-                            <View style={styles.buttonReset}>
-                                <Text style={{fontWeight: 'bold'}}>Select All</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View>
                 <View style={styles.days}>
                     <Text>{"S"}</Text>
                     <Text>{"M"}</Text>
@@ -669,14 +576,6 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         margin: 10,
     },
-    lineA: {
-        backgroundColor: 'lime',
-        paddingRight: 15,
-        paddingLeft: 15,
-        paddingBottom: 15,
-        paddingTop: 15,
-        margin: 10
-    },
     scrollStyle: {
         flexDirection: 'column'
     },
@@ -684,25 +583,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         flexDirection: 'column',
         justifyContent: 'space-around',
-    },
-    buttons: {
-        flexDirection: 'row',
-        justifyContent: "space-evenly",
-        paddingTop: 10,
-        paddingBottom: 10
-    },
-
-    buttonReset: {
-        backgroundColor: 'lightskyblue',
-        padding: 10,
-        borderRadius: 10,
-        paddingLeft: 30,
-        paddingRight: 30
-    },
-    buttonSubmit: {
-        backgroundColor: 'lightskyblue',
-        padding: 10,
-        borderRadius: 10
     },
     times: {
         justifyContent: 'space-around',
@@ -716,6 +596,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around'
     },
-    intervals: {
-    }
 });
