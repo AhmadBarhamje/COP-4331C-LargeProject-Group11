@@ -94,10 +94,10 @@ export class CreateGroup extends Component {
         }
 
         let groupData = {
-            name: JSON.stringify(this.state.groupName),
+            name: this.props.route.params.userName + "." + this.state.groupName,
         }
 
-        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/deleteSchedule`, groupData)
+        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/deleteSchedule`, { data: groupData })
          .then(res => {
             if(!res.data.success) {
                 Alert.alert("Only the owner of the group can delete it.");
@@ -119,7 +119,7 @@ export class CreateGroup extends Component {
          }).catch((error) => {
            console.log(error)
            console.log(error.response)
-           Alert.alert(error.response.data.error)
+           Alert.alert("Group does not exist.")
         })
 
     }
