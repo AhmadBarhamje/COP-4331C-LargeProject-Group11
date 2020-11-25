@@ -52,6 +52,16 @@ export class Dashboard extends Component {
          })
     }
 
+    navigate_to_AddMembers() {
+        this.props.navigation.navigate("AddMembers", {
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
+         })
+    }
+
     navigate_to_SchedulePage() {
         this.props.navigation.navigate("SchedulePage", {
             accessToken: this.props.route.params.accessToken,
@@ -110,7 +120,7 @@ export class Dashboard extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttonStyle2]}
-                            onPress = {() => this.testFunc()}>
+                            onPress = {() => this.navigate_to_AddMembers()}>
                             <Text style={styles.buttonTextStyle}> Add/Remove Users </Text>
                         </TouchableOpacity>
                         <TouchableOpacity

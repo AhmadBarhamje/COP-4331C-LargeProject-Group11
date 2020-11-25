@@ -18,7 +18,7 @@ import {
 import axios from 'axios';
 
 
-export class CreateGroup extends Component {
+export class AddMembers extends Component {
     constructor(props) {
         super(props)
 
@@ -42,38 +42,40 @@ export class CreateGroup extends Component {
         }
     }
 
-    createGroup() {
+    addMember() {
         Keyboard.dismiss();
 
         if(!this.state.groupName) {
             Alert.alert("Please enter a non-empty group name.");
             return;
         }
+        if(!this.state.memberName) {
+            Alert.alert("Please enter a non-empty member name.");
+            return;
+        }
+        if(this.state.memberName == this.props.route.params.userName) {
+            Alert.alert("You cannot add yourself from the group.");
+            return;
+        }
 
         let groupData = {
             name: this.state.groupName,
+            affectedUser: this.state.memberName,
         }
 
-        axios.post(`https://cop4331-group11-large.herokuapp.com/api/createSchedule`, groupData)
+        axios.post(`https://cop4331-group11-large.herokuapp.com/api/addMember`, groupData)
          .then(res => {
             console.log(res.data);
 
             if(!res.data.success) {
-                Alert.alert("A group exists with that name.");
+                Alert.alert("Failed.");
                 return;
             }
 
-            Alert.alert("Group successfully created!");
+            Alert.alert("Member successfully added!");
 
             this.groupNameField.clear();
-
-             this.props.navigation.navigate("Dashboard", {
-                accessToken: this.props.route.params.accessToken,
-                id: this.props.route.params.id,
-                firstName: this.props.route.params.firstName,
-                lastName: this.props.route.params.lastName,
-                userName: this.props.route.params.userName
-             })
+            this.memberNameField.clear();
 
          }).catch((error) => {
             console.log(error)
@@ -83,38 +85,39 @@ export class CreateGroup extends Component {
 
     }
 
-    deleteGroup() {
+    deleteMember() {
         Keyboard.dismiss();
-
-        console.log(this.props.route.params.userName);
 
         if(!this.state.groupName) {
             Alert.alert("Please enter a non-empty group name.");
             return;
         }
-
-        let groupData = {
-            name: JSON.stringify(this.state.groupName),
+        if(!this.state.memberName) {
+            Alert.alert("Please enter a non-empty member name.");
+            return;
+        }
+        if(this.state.memberName == this.props.route.params.userName) {
+            Alert.alert("You cannot delete yourself from the group.");
+            return;
         }
 
-        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/deleteSchedule`, groupData)
+        let groupData = {
+            name: this.state.groupName,
+            affectedUser: this.state.memberName,
+        }
+
+        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/removeMember`, groupData)
          .then(res => {
+
             if(!res.data.success) {
-                Alert.alert("Only the owner of the group can delete it.");
+                Alert.alert(res.data.error);
                 return;
             }
 
-            Alert.alert("Group successfully deleted!");
-
             this.groupNameField.clear();
+            this.memberNameField.clear();
 
-             this.props.navigation.navigate("Dashboard", {
-                accessToken: this.props.route.params.accessToken,
-                id: this.props.route.params.id,
-                firstName: this.props.route.params.firstName,
-                lastName: this.props.route.params.lastName,
-                userName: this.props.route.params.userName
-             })
+            Alert.alert("Member successfully deleted.");
 
          }).catch((error) => {
            console.log(error)
@@ -150,21 +153,34 @@ export class CreateGroup extends Component {
                         blurOnSubmit={false}
                       />
                     </View>
+                    <View style={styles.SectionStyle}>
+                      <TextInput
+                          ref={input => { this.memberNameField = input }}
+                          style={styles.inputStyle}
+                          onChangeText = {(text) => this.setState({memberName: text})}
+                          placeholder="Enter Member User Name"
+                          placeholderTextColor="#8b9cb5"
+                          autoCapitalize="none"
+                          onSubmitEditing={Keyboard.dismiss}
+                          underlineColorAndroid="#f000"
+                          blurOnSubmit={false}
+                        />
+                    </View>
 
                     <TouchableOpacity
                       style={styles.buttonStyle}
                       activeOpacity={0.5}
-                      onPress = {() => this.createGroup()}>
+                      onPress = {() => this.addMember()}>
                       <Text style={styles.buttonTextStyle}>
-                        CREATE GROUP
+                        ADD MEMBER
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={[styles.buttonStyle, {backgroundColor: "#cf1919"}]}
                       activeOpacity={0.5}
-                      onPress = {() => this.deleteGroup()}>
+                      onPress = {() => this.deleteMember()}>
                       <Text style={styles.buttonTextStyle}>
-                        DELETE GROUP
+                        DELETE MEMBER
                       </Text>
                     </TouchableOpacity>
                   </KeyboardAvoidingView>
