@@ -337,10 +337,75 @@ input[type=text]:placeholder {
   box-sizing: border-box;
 }
 
-.jelly-container {
+	#sea {
+    width: 200px;
+    height: 300px;
+		margin-left: 100px;
+		transform: rotate(39deg);
+		animation: boat 8.3s ease-out 0s alternate infinite;
+	}
+
+.floatingboat {
+	background: linear-gradient(-45deg, #257b9e, #5bb1d4);
 	width: 100%;
-	position: relative;
-	height: 500px ;
-	overflow: hidden;
-	background: linear-gradient(to bottom, rgba(0, 141, 210, 0.63) 0%, rgba(0, 0, 0, 0) 100% );
+	
 }
+
+	@keyframes boat {
+		from {transform: rotate(-45deg);}
+		to { transform: rotate(-30deg);}
+	}
+	#sea-Boat {
+    animation: sea-Boat 1.4s ease-in-out alternate infinite;
+	}
+	@keyframes sea-Boat {
+		from {transform: translateX(0);}
+		to {transform: translateX(6px);}
+	}
+	#sea-Head {
+		animation: sea-Head 1.4s ease-in-out alternate infinite;
+	}
+	@keyframes sea-Head {
+		from {transform: translateY(2px) translateX(-5px) rotate(-22deg);}
+		to {transform: translateY(2px) translateX(0) rotate(-22deg);}
+	}
+	
+	#sea-Shadow { 
+		animation: sea-Shadow 1.4s ease-in-out alternate infinite;
+	}
+	@keyframes sea-Shadow {
+		from {transform: translateX(0)};
+		to {transform: translateX(-6px)};
+	}
+	#sea-Top-Deck-Shadow {
+		animation: sea-Top-Deck-Shadow 1.4s ease-in-out alternate infinite;
+	}
+
+	@keyframes sea-Top-Deck-Shadow {
+		from {transform: translateX(0);}
+		to {transform: translateX(-3px);}
+	}
+	#sea-Top-Deck-Inside {
+		animation: sea-Top-Deck-Inside 1.4s ease-in-out alternate infinite;
+	}
+
+	@keyframes sea-Top-Deck-Inside {
+		from {transform: translateX(0);}
+		to {transform: translateX(-3px);}
+	}
+	
+	#sea-Outside-left {
+		animation: sea-Outside-left 1.4s ease-in-out alternate infinite;
+	}
+	@keyframes sea-Outside-left {
+		from {transform: translateX(0);}
+		to {transform: translateX(-5px);}
+	}
+
+	#sea-Deck-Shadow-right {
+		animation: sea-Deck-Shadow-right 1.4s ease-in-out alternate infinite;
+	}
+	@keyframes sea-Deck-Shadow-right {
+		from {transform: translateX(0);}
+		to {transform: translateX(-8px);}
+	}
