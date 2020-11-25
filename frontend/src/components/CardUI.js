@@ -87,7 +87,6 @@ function CardUI() {
         </span>
             <span class="floatingboat">
             <div class="waves background"></div>
-            <div class="whale"></div>
             <div class="boat-wrapper">
           <div class="boat"></div>
          </div>
