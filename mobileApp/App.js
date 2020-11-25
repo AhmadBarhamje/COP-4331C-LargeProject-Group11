@@ -11,6 +11,7 @@ import {Register} from './src/Register.js';
 import {ForgotPassword} from './src/ForgotPassword.js';
 import {Settings} from './src/Settings.js';
 import {ChangePassword} from './src/ChangePassword.js';
+import {BestSchedulePage} from './src/BestSchedulePage';
 
 const Stack = createStackNavigator();
 
