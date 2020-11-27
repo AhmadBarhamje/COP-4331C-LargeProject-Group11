@@ -14,6 +14,7 @@ import {ChangePassword} from './src/ChangePassword.js';
 import {CreateGroup} from './src/CreateGroup.js';
 import {ViewGroups} from './src/ViewGroups.js';
 import {AddMembers} from './src/AddMembers.js';
+import {BestSchedulePage} from './src/BestSchedulePage';
 
 const Stack = createStackNavigator();
 

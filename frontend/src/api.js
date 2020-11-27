@@ -70,6 +70,31 @@ const api = {
     },
     changepass: (body) => {
         return axios.post(`${url}/auth/changepass`, body);
+    },
+    // Schedule and availability endpoints below
+    getAvailability: () => { // Returns the user's availability
+        return axios.get(`${url}/getAvailability`);
+    },
+    setAvailability: (body) => { // Sets the user's availability, need param "newAvailability"
+        return axios.post(`${url}/setAvailability`, body);
+    },
+    getAllSchedules: () => { // Returns list of schedules user is in
+        return axios.get(`${url}/getAllSchedules`);
+    },
+    getSchedule: (name) => { // Gets data for a specific schedule, pass in a string (not json) of the schedule ex: cnaas.sched1
+        return axios.get(`${url}/getSchedule?name=${name}`);
+    },
+    createSchedule: (body) => { // Create a new schedule, user will be in this schedule by default, need param "name"
+        return axios.post(`${url}/createSchedule`, body);
+    },
+    addMember: (body) => { // Add a member to a schedule, need params "name" and "affectedUser" 
+        return axios.post(`${url}/addMember`, body);
+    },
+    removeMember: (body) => { // Remove a member from a schedule, need params "name" and "affectedUser" 
+        return axios.delete(`${url}/removeMember`, {data: body});
+    },
+    deleteSchedule: (body) => { // Deletes a schedule, need param "name"
+        return axios.delete(`${url}/deleteSchedule`, {data: body});
     }
 };
 
