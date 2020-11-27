@@ -59,7 +59,7 @@ export class AddMembers extends Component {
         }
 
         let groupData = {
-            name: this.state.groupName,
+            name: this.props.route.params.userName + "." +  this.state.groupName,
             affectedUser: this.state.memberName,
         }
 
@@ -102,11 +102,11 @@ export class AddMembers extends Component {
         }
 
         let groupData = {
-            name: this.state.groupName,
+            name: this.props.route.params.userName + "." + this.state.groupName,
             affectedUser: this.state.memberName,
         }
 
-        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/removeMember`, groupData)
+        axios.delete(`https://cop4331-group11-large.herokuapp.com/api/removeMember`, {data: groupData })
          .then(res => {
 
             if(!res.data.success) {

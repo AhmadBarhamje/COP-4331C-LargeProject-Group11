@@ -62,7 +62,7 @@ export class ViewGroups extends Component {
             while(j < schedules.length && schedules[j].charAt(0) == schedules[i].charAt(0)) j++;
             var tempData = [];
             for(var k = i; k < j; k++) {
-                tempData.push(schedules[k])
+                tempData.push({name: schedules[k]})
             }
 
             var ch = schedules[i].toUpperCase().charAt(0);
@@ -97,8 +97,8 @@ export class ViewGroups extends Component {
 
     }
 
-    testFunc(itemN) {
-        console.log("name " + itemN);
+    navigate_to_schedule(scheduleName) {
+        console.log("name " + scheduleName);
     }
 
     render() {
@@ -106,9 +106,9 @@ export class ViewGroups extends Component {
             <View style={styles.container}>
                 <SectionList
                     sections={ this.state.listData }
-                    renderItem={({item}) => <Button title={item} onPress={() => this.testFunc('{item}')}  />}
+                    renderItem={({item, index, section}) => <Button title={item.name} onPress={() => { this.navigate_to_schedule({item}.item.name)}}  />}
                     renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={(item, index) => item+index}
                 />
             </View>
         );
