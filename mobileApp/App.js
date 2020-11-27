@@ -11,6 +11,9 @@ import {Register} from './src/Register.js';
 import {ForgotPassword} from './src/ForgotPassword.js';
 import {Settings} from './src/Settings.js';
 import {ChangePassword} from './src/ChangePassword.js';
+import {CreateGroup} from './src/CreateGroup.js';
+import {ViewGroups} from './src/ViewGroups.js';
+import {AddMembers} from './src/AddMembers.js';
 import {BestSchedulePage} from './src/BestSchedulePage';
 
 const Stack = createStackNavigator();
@@ -55,19 +58,35 @@ const App: () => React$Node = () => {
             component = {ChangePassword}
             options={{title: 'Change your password'}}
         />
-        
+
         <Stack.Screen
             name = "SchedulePage"
             component = {SchedulePage}
             options={{title: 'Schedule'}}
         />
-        
+
         <Stack.Screen
             name = "SubmitAvailabilityPage"
             component = {SubmitAvailabilityPage}
             options={{title: 'Enter Your Weekly Availability'}}
         />
 
+        <Stack.Screen
+            name = "CreateGroup"
+            component = {CreateGroup}
+            options={{title: 'Create/Delete a Group'}}
+        />
+
+        <Stack.Screen
+            name = "ViewGroups"
+            component = {ViewGroups}
+            options={{title: 'View all your groups'}}
+        />
+        <Stack.Screen
+            name = "AddMembers"
+            component = {AddMembers}
+            options={{title: 'Add/Delete members'}}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

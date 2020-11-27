@@ -42,6 +42,26 @@ export class Dashboard extends Component {
         console.log(this.props)
     }
 
+    navigate_to_createGroup() {
+        this.props.navigation.navigate("CreateGroup", {
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
+         })
+    }
+
+    navigate_to_AddMembers() {
+        this.props.navigation.navigate("AddMembers", {
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
+         })
+    }
+
     navigate_to_SchedulePage() {
         this.props.navigation.navigate("SchedulePage", {
             accessToken: this.props.route.params.accessToken,
@@ -51,7 +71,17 @@ export class Dashboard extends Component {
             userName: this.props.route.params.userName
         })
     }
-    
+
+    navigate_to_ViewGroups() {
+        this.props.navigation.navigate("ViewGroups", {
+            accessToken: this.props.route.params.accessToken,
+            id: this.props.route.params.id,
+            firstName: this.props.route.params.firstName,
+            lastName: this.props.route.params.lastName,
+            userName: this.props.route.params.userName
+        })
+    }
+
     navigate_to_SubmitSchedulePage() {
         this.props.navigation.navigate("SubmitAvailabilityPage", {
             accessToken: this.props.route.params.accessToken,
@@ -73,26 +103,31 @@ export class Dashboard extends Component {
                    alignContent: 'center',
                  }}>
                    <View style={styles.SectionStyle}>
-                       <TouchableOpacity
-                         style={[styles.buttonStyle2, {}]}
-                         onPress = {() => this.navigate_to_SchedulePage()}>
-                        <Text style={styles.buttonTextStyle}> View Schedule </Text>
-                       </TouchableOpacity>
-                       <TouchableOpacity
-                        style={styles.buttonStyle2}
-                        onPress = {() => this.navigate_to_SubmitSchedulePage()}>
-                       <Text style={styles.buttonTextStyle}> Update Your Schedule </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={[styles.buttonStyle2]}
-                        onPress = {() => this.testFunc()}>
-                       <Text style={styles.buttonTextStyle}> Add/Remove Users </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                       style={[styles.buttonStyle2, {backgroundColor: '#7d7d7d'}]}
-                       onPress = {() => this.navigate_to_settings()}>
-                      <Text style={styles.buttonTextStyle}> Settings </Text>
-                     </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.buttonStyle2, {}]}
+                            onPress = {() => this.navigate_to_ViewGroups()}>
+                            <Text style={styles.buttonTextStyle}> View Groups </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonStyle2}
+                            onPress = {() => this.navigate_to_SubmitSchedulePage()}>
+                            <Text style={styles.buttonTextStyle}> Update Your Schedule </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonStyle2}
+                            onPress = {() => this.navigate_to_createGroup()}>
+                            <Text style={styles.buttonTextStyle}> Create/Delete Groups </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.buttonStyle2]}
+                            onPress = {() => this.navigate_to_AddMembers()}>
+                            <Text style={styles.buttonTextStyle}> Add/Remove Users </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.buttonStyle2, {backgroundColor: '#7d7d7d'}]}
+                            onPress = {() => this.navigate_to_settings()}>
+                            <Text style={styles.buttonTextStyle}> Settings </Text>
+                        </TouchableOpacity>
                    </View>
 
                 </ScrollView>
