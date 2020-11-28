@@ -8,6 +8,12 @@ function Login()
 
     const [message,setMessage] = useState('');
 
+    const goRegisterPage = async event =>
+    {
+            event.preventDefault();
+            window.location.href = '/register';
+    }
+    
     const doLogin = async event => 
     {
         event.preventDefault();
@@ -63,6 +69,11 @@ function Login()
             onClick={doLogin} />
             </form>
             <span id="loginResult">{message}</span>
+        <div id="formFooter">
+               <a class="underlineHover" onClick={goRegisterPage}>Register</a> <br />
+               <a class="underlineHover" >Forgot Password?</a>
+    	</div>
+
         </div>
 	</div>
     );
