@@ -78,9 +78,26 @@ function CardUI()
     };
 
     return(
+      <div class="wrapper fadeIn first">
         <div id="cardUIDiv">
+<<<<<<< HEAD
             <button onClick={goUpdatePage}>Go to Schedule</button>
+=======
+            <br /><br />
+            <input type="text" id="searchText" class="fadeIn second" placeholder="Card To Search For"
+                ref={(c) => search = c} />
+            <button type="button" id="searchCardButton" class="buttons fadeIn third"
+                onClick={searchCard}> Search Card</button>
+            <span id="cardSearchResult">{searchResults}</span>
+            <p id="cardList">{cardList}</p><br />
+            <input type="text" id="cardText" class="fadeIn second" placeholder="Card To Add"
+                ref={(c) => card = c} />
+            <button type="button" id="addCardButton" class="buttons fadeIn third"
+                onClick={addCard}> Add Card </button>
+            <span id="cardAddResult">{message}</span>
+>>>>>>> 535effdb9e3b27421bbfb92c60e063d2a631ff3c
        </div>
+    </div>
     );
 }
 
