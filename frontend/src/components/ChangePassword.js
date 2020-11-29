@@ -70,7 +70,7 @@ function ChangePassword() {
           />
         </form>
         <div id="formFooter">
-         <span class="a underlineHover" onClick={goLoginPage}>Back to Dashboard</span>
+         <span class="a underlineHover" onClick={goLoginPage}>Back to Login</span>
     	</div>
       </div>
     </div>
