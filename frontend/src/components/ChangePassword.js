@@ -23,7 +23,7 @@ function ChangePassword() {
     var obj = { password: password, newPassword: newPassword };
     let res;
     try {
-      res = await api.changePassword(obj);
+      res = await api.changepass(obj);
       console.log("res from change", res);
       if (res.data.success) {
         alert("password Changed Successfully");
