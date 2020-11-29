@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import WeekCalendar from 'react-week-calendar';
+import CustomEvent from '../components/CustomEvent';
+import CustomModal from '../components/CustomModal';
 
 export default class StandardCalendar extends React.Component {
 
@@ -44,6 +46,7 @@ export default class StandardCalendar extends React.Component {
     this.setState({
       selectedIntervals: selectedIntervals.concat(intervals), //
       lastUid: lastUid + newIntervals.length
+      
     })
   }
 
@@ -55,11 +58,13 @@ export default class StandardCalendar extends React.Component {
       numberOfDays= {7}
       dayFormat = {'dd. MM.DD'}
       scaleUnit = {30}
-      useModal = {false}
+      //useModal = {false}
       selectedIntervals = {this.state.selectedIntervals}
       onIntervalSelect = {this.handleSelect}
       onIntervalUpdate = {this.handleEventUpdate}
       onIntervalRemove = {this.handleEventRemove}
+      modalComponent = {CustomModal}
+      //eventComponent={CustomEvent} shows booked on cell 
     />
   }
 }
