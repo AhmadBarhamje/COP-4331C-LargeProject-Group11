@@ -11,7 +11,7 @@ function ForgotPassword() {
     var obj = { userName: userName, email: email };
     let res;
     try {
-      res = await api.forgotPassword(obj);
+      res = await api.forgotpass(obj);
       console.log("res from change", res);
       if (res.data.success) {
         alert("Check Your Email");
