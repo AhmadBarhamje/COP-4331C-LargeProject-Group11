@@ -3,19 +3,15 @@ import React, { useState } from "react";
 import api from "../api";
 
 function ChangePassword() {
-  var CurrentPassword;
-  var NewPassword;
-
   const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setnewPassword] = useState("");
-	
-    const goLoginPage = async event =>
-    {
-            event.preventDefault();
-            window.location.href = '/';
-    }
-	
+
+  const goLoginPage = async (event) => {
+    event.preventDefault();
+    window.location.href = "/";
+  };
+
   //onSubmit={doForgotpass}
   const changePasswordCaller = async (event) => {
     event.preventDefault();
@@ -26,9 +22,9 @@ function ChangePassword() {
       res = await api.changepass(obj);
       console.log("res from change", res);
       if (res.data.success) {
-        alert("password Changed Successfully");
+        setMessage("password Changed Successfully");
       } else {
-        alert(res.data.error);
+        setMessage(res.data.error);
       }
     } catch (e) {
       alert(e.toString());
@@ -68,10 +64,14 @@ function ChangePassword() {
             value='Reset Password'
             onClick={changePasswordCaller}
           />
+          <br />
+          <span id='loginResult'>{message}</span>
         </form>
-        <div id="formFooter">
-         <span class="a underlineHover" onClick={goLoginPage}>Back to Login</span>
-    	</div>
+        <div id='formFooter'>
+          <span class='a underlineHover' onClick={goLoginPage}>
+            Back to Login
+          </span>
+        </div>
       </div>
     </div>
   );

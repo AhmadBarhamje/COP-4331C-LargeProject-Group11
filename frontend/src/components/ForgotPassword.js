@@ -14,9 +14,9 @@ function ForgotPassword() {
       res = await api.forgotpass(obj);
       console.log("res from change", res);
       if (res.data.success) {
-        alert("Check Your Email");
+        setMessage("Check Your Email");
       } else {
-        alert(res.data.error);
+        setMessage(res.data.error);
       }
     } catch (e) {
       alert(e.toString());
@@ -56,6 +56,8 @@ function ForgotPassword() {
             className='buttons'
             value='Continue'
           />
+          <br />
+          <span id='loginResult'>{message}</span>
         </form>
       </div>
     </div>
