@@ -48,11 +48,21 @@ export default class StandardCalendar extends React.Component {
       lastUid: lastUid + newIntervals.length
       
     })
+    this.logging(newIntervals);
+  }
+  logging(interval) {
+    //console.log(interval[0].start)
+    for (var i = 0; i < interval.length; i++) {
+      console.log(interval[i].start._d.getDay() + ' ' + interval[i].start._d.toTimeString())
+      console.log(interval[i].end._d.getDay() + ' ' + interval[i].end._d.toTimeString())
+    }
+    
+
   }
 
   render() {
     return <WeekCalendar
-      firstDay = {moment()}
+      firstDay = {moment().day(0)}
       startTime = {moment({h: 0, m: 0})}
       //endTime = {moment({h: 24, m: 59})}
       numberOfDays= {7}

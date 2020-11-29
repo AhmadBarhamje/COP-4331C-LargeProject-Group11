@@ -21,7 +21,7 @@ class Modal extends React.Component {
   }
 
   handleSave = () => {
-    const { value } = this.input;
+    const { value } = '';
     this.props.onSave({
       value,
     });
@@ -46,13 +46,6 @@ class Modal extends React.Component {
     return (
       <div className="customModal">
         <div className="customModal__text">{this.renderText()}</div>
-        <input
-          ref={(el) => { this.input = el; }}
-          className="customModal__input"
-          type="text"
-          placeholder="Enter something"
-          defaultValue={value}
-        />
         <button className="customModal__button" onClick={this.handleRemove}>Delete</button>
         <button className="customModal__button customModal__button_float_right" onClick={this.handleSave}>Save</button>
       </div>
