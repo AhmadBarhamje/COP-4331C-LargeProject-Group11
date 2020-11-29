@@ -99,6 +99,14 @@ export class ViewGroups extends Component {
 
     navigate_to_schedule(scheduleName) {
         console.log("name " + scheduleName);
+        this.props.navigation.navigate("BestSchedule", {
+          accessToken: this.props.route.params.accessToken,
+          id: this.props.route.params.id,
+          firstName: this.props.route.params.firstName,
+          lastName: this.props.route.params.lastName,
+          userName: this.props.route.params.userName,
+          ownerSchedule: scheduleName
+      })
     }
 
     render() {

@@ -87,6 +87,12 @@ const App: () => React$Node = () => {
             component = {AddMembers}
             options={{title: 'Add/Delete members'}}
         />
+        
+        <Stack.Screen
+            name = "BestSchedule"
+            component = {BestSchedulePage}
+            options={{title: 'Best Meeting Times'}}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

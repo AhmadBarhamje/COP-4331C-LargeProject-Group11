@@ -5,6 +5,17 @@ import Header from './Header';
 import axios from 'axios';
 import ArrowButton from './ArrowButton';
 
+let memberList = [
+  {Shawn: 
+  {
+      availability: {sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)}
+  }},
+  {Chris: 
+  {
+      availability: {sun: Array(48).fill(true), mon: Array(48).fill(true), tue: Array(48).fill(true), wed: Array(48).fill(true), thu: Array(48).fill(true), fri: Array(48).fill(true), sat: Array(48).fill(true)}
+  }}
+];
+
 export class SchedulePage extends Component {
   constructor(props) {
       super(props)
@@ -77,6 +88,8 @@ export class SchedulePage extends Component {
 }
 
 convertArrayToTimeHelper(timeIndex) {
+  let startTime;
+
   switch(timeIndex)
   {
     case 0:
@@ -219,9 +232,13 @@ convertArrayToTimeHelper(timeIndex) {
       break;
     case 46:
       startTime = "11:30 PM";
+      break;
+    case 47:
+      startTime = "12:00 AM";
+      break;
   }
 
-  return timeIndex;
+  return startTime;
 }
 
  convertArrayToTime(startIndex, endIndex) {
@@ -233,7 +250,66 @@ convertArrayToTimeHelper(timeIndex) {
     
  }
 
- /*buildViewSchedule() {
+ // run through each member of a list
+ // for each member of the list run through all 7 days
+    // print the day card title
+ // for all 7 days run through 48 time slots
+
+ /**return(
+        <View key={day.toString() + timeString[0] + timeString[1]} style={style.calendar}>
+          <Card name={"Shawn McChargue???"} start={timeString[0]} end={timeString[1]}/>
+        </View>
+      );  */
+
+
+ //              [{name: "Shawn", start: "9:00 AM", end: "5:00 PM"}  ]
+
+ whatIwant(list) {
+
+    let cardArray = [];
+    let cardObj = {name: "", start: "", end: ""};
+
+    for (let i = 0; i < list.length; i++) 
+    {
+      console.log("***" + list[i].availability);
+      for(var day in list[i].availability) 
+      {
+          let start;
+          let startBool = false;
+          let end;
+          console.log(day);
+          for (let i = 0; i <= name.availability.length; i++)
+          {
+              if (day[i] && !startBool)
+              {
+                  start = i;
+                  startBool = true;
+              }
+                  
+              if (startBool && !day[i] || i == 47)
+              {
+                  end = i;
+                  break;
+              }
+          }
+
+          let timeString = this.convertArrayToTime(start, end);
+          cardObj.start = timeString[0];
+          cardObj.end = timeString[1];
+          cardObj.name = name;
+          cardArray.push(cardObj);
+      }
+    }
+
+    return cardArray;
+ }
+
+ buidViewCardArray() {
+    let cards = this.whatIwant(memberList);
+    console.log(cards);
+ }
+
+ buildViewSchedule() {
 
   let schedules = [{id: 1},{id: 2}];
   let availability = [{id: 1},{id: 2}];
@@ -279,10 +355,11 @@ convertArrayToTimeHelper(timeIndex) {
       
         return(
           <View style={style.calendar}>
+                  <Text style={style.text}>{this.getDates(new Date())[0]}</Text>
             <Card name={"Shawn McChargue???"} start={timeString[0]} end={timeString[1]}/>
           </View>
-        );
-  }*/
+        );*/
+  }
 
   render() {
     return (
@@ -290,24 +367,7 @@ convertArrayToTimeHelper(timeIndex) {
       <ScrollView>
         <View style={style.button}>
         </View>
-        <Text style={style.text}>{this.getDates(new Date())[0]}</Text>
-
-        <Text style={style.text}>{this.getDates(new Date())[1]}</Text>
-
-        
-        <Text style={style.text}>{this.getDates(new Date())[2]}</Text>
-
-        
-        <Text style={style.text}>{this.getDates(new Date())[3]}</Text>
-
-        
-        <Text style={style.text}>{this.getDates(new Date())[4]}</Text>
-
-        
-        <Text style={style.text}>{this.getDates(new Date())[5]}</Text>
-
-        
-        <Text style={style.text}>{this.getDates(new Date())[6]}</Text>
+        {this.buidViewCardArray()}
       </ScrollView>
     </View>
     )}

@@ -9,6 +9,7 @@ export class BestSchedulePage extends Component {
 
         axios.interceptors.request.use((config) => {
             config.headers['x-auth-token'] = JSON.stringify(this.props.route.params.accessToken);
+            console.log(this.props.route.params.accessToken);
             config.headers['content-type'] = 'application/json; charset=utf-8';
             return config;
         },
@@ -24,7 +25,7 @@ export class BestSchedulePage extends Component {
 
     render(){
         return(
-            <BestSchedule/>
+            <BestSchedule username={this.props.route.params.userName} ownerSchedule={this.props.route.params.ownerSchedule}/>
         )
     }
 }
