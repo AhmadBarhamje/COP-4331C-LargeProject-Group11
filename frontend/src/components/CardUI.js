@@ -14,6 +14,26 @@ function CardUI() {
   var userId = ud.id;
   var firstName = ud.firstName;
   var lastName = ud.lastName;
+  
+    window.onload = readCookie();
+  function readCookie() {
+  var user = -1;
+  var data = document.cookie;
+  var splits = data.split(",");
+// if other data is wanted from the cookie, will be split in the tokens array. Here for future usage if required
+  for (var i = 0; i < splits.length; i++) {
+        var thisOne = splits[i].trim();
+        var tokens = thisOne.split("=");
+        if (tokens[0] == "user") {
+            user = parseInt(tokens[1].trim());
+        }
+        if (user > 0) {
+            return user;
+        } else {
+            window.location.href = '/';
+        }
+    }
+}
 
   const app_name = "cop4331-group11-large";
   function buildPath(route) {
