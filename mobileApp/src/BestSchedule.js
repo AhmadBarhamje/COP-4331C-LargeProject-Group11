@@ -1,10 +1,13 @@
 import axios from 'axios';
-import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, ScrollView, Alert, Button } from 'react-native';
 
-let bestSchedule =  {sun: Array(48).fill(0), mon: Array(48).fill(0), tue: Array(48).fill(0), wed: Array(48).fill(0), thu: Array(48).fill(0), fri: Array(48).fill(0), sat: Array(48).fill(3)};
+let bestSchedule = {sun: Array(48).fill(Array(48).fill(null)), mon: Array(48).fill(Array(48).fill(null)), tue: Array(48).fill(Array(48).fill(null)), wed: Array(48).fill(Array(48).fill(null)), thu: Array(48).fill(Array(48).fill(null)), fri: Array(48).fill(Array(48).fill(null)), sat: Array(48).fill(Array(48).fill(null))};
+let membersLength = 0;
 
-export default function BestSchedule() {
+export default function BestSchedule(props) {
+
+    const [total, setTotal] = useState({});
 
     const sunday = [
         {id: 0},
@@ -357,13 +360,29 @@ export default function BestSchedule() {
         {id: 335},
     ];
 
+    const getSchedule = () => {
+
+        axios.get(`https://cop4331-group11-large.herokuapp.com/api/getSchedule?name=` + props.username + '.' + props.ownerSchedule, {})
+         .then(res => {
+            bestSchedule = res.data.schedule;
+            membersLength = res.data.members.length;
+            console.log("**************************************************************************" + membersLength);
+            setTotal(bestSchedule);
+         }).catch((error) => {
+            console.log(error)
+            console.log(error.response)
+            Alert.alert(error.response.data.error)
+         })
+
+    }
+
     
     const buildViewSunday = () => {
         return sunday.map(item =>{
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id]),
+                        backgroundColor: calculateShade(bestSchedule.sun[item.id].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -376,7 +395,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 48]),
+                        backgroundColor: calculateShade(bestSchedule.mon[item.id - 48].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -389,7 +408,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 96]),
+                        backgroundColor: calculateShade(bestSchedule.tue[item.id - 96].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -402,7 +421,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 144]),
+                        backgroundColor: calculateShade(bestSchedule.wed[item.id - 144].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -415,7 +434,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 192]),
+                        backgroundColor: calculateShade(bestSchedule.thu[item.id - 192].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -428,7 +447,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 240]),
+                        backgroundColor: calculateShade(bestSchedule.fri[item.id - 240].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -441,7 +460,7 @@ export default function BestSchedule() {
             return(
                 <View key={item.id} style={styles.calendar}>
                     <View style={{
-                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 288]),
+                        backgroundColor: calculateShade(bestSchedule.sat[item.id - 288].length),
                         padding: 15,
                         margin: 10,}}>
                      </View>
@@ -455,26 +474,33 @@ export default function BestSchedule() {
         let G;
         if (num == 0)
             G = 0;
-        else if(num == 1)
+        else if (num == 1)
         {
             G = 80;
         }
+        else if (num >= membersLength)
+        {
+            G = 255;
+        }
         else
         {
-            G = 80 + (num * 10);
+            G = (255/membersLength) * num;
         }
         let end = ", 0)";
 
 
         if (G >= 250)
-            G = 250;
+            G = 255;
 
         return colval + G + end;
-    }        
-
+    }     
+    
     return (
         <View style={styles.CalendarDay}>
             <ScrollView style={styles.scrollStyle}>
+                <View>
+                    <Button title="See Best Meeting Times" onPress={getSchedule}/>
+                </View>
                 <View style={styles.days}>
                     <Text>{"S"}</Text>
                     <Text>{"M"}</Text>
