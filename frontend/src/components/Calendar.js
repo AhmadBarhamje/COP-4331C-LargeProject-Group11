@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import WeekCalendar from 'react-week-calendar';
-import getAvailability from '../api';
 
 export default class StandardCalendar extends React.Component {
 
@@ -9,6 +8,7 @@ export default class StandardCalendar extends React.Component {
     super(props);
     this.state = {
       lastUid: 4,
+      selectedIntervals: []
     }
   }
 
