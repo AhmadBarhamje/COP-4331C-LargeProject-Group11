@@ -70,7 +70,7 @@ function CardUI() {
           class='fadeIn third'
           onClick={(e) => {
             e.preventDefault();
-            window.location = "/";
+            window.location = "/changepassword";
           }}
         >
           {" "}
