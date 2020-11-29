@@ -153,7 +153,7 @@ exports.forgotpass = async (req, res) => {
         const { userName, email } = req.body;
         var user = await User.findOne( {userName: userName, email: email} );
         if (!user) {
-            return res.status(200).json( {success: true, error: ""} )
+            return res.status(200).json( {success: false, error: ""} )
         } else {
             tempPassword = generator.generate({numbers: true, strict: true});
             console.log(`Temporary password ${tempPassword}`);
@@ -167,7 +167,7 @@ exports.forgotpass = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: "Internal Server Error!" })
     }
-}
+};
 
 exports.changepass = async (req, res, next) => {
     try {

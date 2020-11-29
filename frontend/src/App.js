@@ -16,6 +16,12 @@ function App() {
         <Route path="/register" exact>
           <RegisterPage/>
         </Route>
+        <Route path='/forgotpassword' exact>
+          <ForgotPasswordPage />
+        </Route>
+        <Route path='/changepassword' exact>
+          <ChangePasswordPage />
+        </Route>
         <Route path="/cards" exact>
           <CardPage/>
         </Route>
