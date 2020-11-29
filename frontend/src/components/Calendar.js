@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import WeekCalendar from 'react-week-calendar';
+import getAvailability from '../api';
 
 export default class StandardCalendar extends React.Component {
 
@@ -41,19 +42,20 @@ export default class StandardCalendar extends React.Component {
     });
 
     this.setState({
-      selectedIntervals: selectedIntervals.concat(intervals),
+      selectedIntervals: selectedIntervals.concat(intervals), //
       lastUid: lastUid + newIntervals.length
     })
   }
 
   render() {
     return <WeekCalendar
-      firstDay = {moment().day(0)}
+      firstDay = {moment()}
       startTime = {moment({h: 0, m: 0})}
       //endTime = {moment({h: 24, m: 59})}
       numberOfDays= {7}
-      dayFormat = {'dd., MM.DD'}
+      dayFormat = {'dd. MM.DD'}
       scaleUnit = {30}
+      useModal = {false}
       selectedIntervals = {this.state.selectedIntervals}
       onIntervalSelect = {this.handleSelect}
       onIntervalUpdate = {this.handleEventUpdate}

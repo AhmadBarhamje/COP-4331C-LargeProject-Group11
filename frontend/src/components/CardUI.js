@@ -1,16 +1,19 @@
 import React from 'react';
 import PageTitle from '../components/PageTitle';
-import WeekCalendar from 'react-week-calendar';
 import 'react-week-calendar/dist/style.css';
 
-import Calendar from './Calendar'
+const goToUpdate = async event =>
+{
+    event.preventDefault();
+    window.location.href = '/update';
+}
 
 const CardUI = () =>
 {
     return(
         <div>
         <PageTitle />
-        <Calendar />
+        <button onClick={goToUpdate}>Go to Update</button>
         </div>
     );
 };
