@@ -1,5 +1,8 @@
 import React from 'react';
+import { BasicTable } from '../components/BasicTable';
+import Calendar from '../components/Calendar';
 import CalendarComponent from '../components/CalendarComponent';
+//import BasicTable from '../components/BasicTable'
 
 const CardPage = () =>
 {
@@ -11,7 +14,7 @@ const CardPage = () =>
     return(
         <div>
             <span id="userName">Showing Schedule for {firstName} {lastName}</span>
-            <CalendarComponent />
+            <BasicTable />
         </div>
         );
 }

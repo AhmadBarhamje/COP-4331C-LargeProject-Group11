@@ -6,7 +6,9 @@ import Calendar from './Calendar'
 
 const CalendarComponent = () =>
 {
+    
     return(
+        
         <div>
         <PageTitle />
         <Calendar />
