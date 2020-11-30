@@ -11,7 +11,9 @@ function Register()
     var lastName;
     var regex = /\S+@\S+\.\S+/;
 
+
     const [message,setMessage] = useState('');
+
 
     const goLoginPage = async event =>
     {

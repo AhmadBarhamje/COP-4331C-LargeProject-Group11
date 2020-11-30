@@ -5,6 +5,7 @@ function Login()
 {
     var loginName;
     var loginPassword;
+    var userId = 0;
 
     const [message,setMessage] = useState('');
 
@@ -45,6 +46,7 @@ function Login()
 
                 console.log(localStorage.getItem('accessToken'));
                 setMessage('');
+                saveCookie();
                 window.location.href = '/cards';
             }
         }
@@ -55,7 +57,13 @@ function Login()
         }    
     };
 
-
+    function saveCookie()
+    {
+        var minutes = 20;
+        var date = new Date();
+        date.setTime(date.getTime()+(minutes*60*1000));	
+        document.cookie = "userId=" + userId + ";expires=" + date.toGMTString() + ";SameSite=Lax";
+    }
     return(
 	<div class="wrapper fadeInDown">
         <div id="loginDiv">

@@ -16,6 +16,19 @@ function CardUI()
     var firstName = ud.firstName;
     var lastName = ud.lastName;
     
+    window.onload = readCookie();
+
+    function readCookie() {
+        var user = -1;
+        var data = document.cookie;
+        let res
+
+            if ( res.data.id === -5 ) {
+                return user;
+            } else {
+                window.location.href = '/';
+            }
+     }
     
     const app_name = 'cop4331-group11-large'
     function buildPath(route)
