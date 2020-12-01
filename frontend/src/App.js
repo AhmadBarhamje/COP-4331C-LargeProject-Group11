@@ -7,6 +7,8 @@ import CardPage from './pages/CardPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import AvailabilityPage from './pages/AvailabilityPage';
+import ViewSchedulesPage from './pages/ViewSchedulesPage';
 
 function App() {
   return (
@@ -17,6 +19,12 @@ function App() {
         </Route>
         <Route path="/register" exact>
           <RegisterPage/>
+        </Route>
+        <Route path="/availability" exact>
+          <AvailabilityPage/>
+        </Route>
+        <Route path="/viewschedules" exact>
+          <ViewSchedulesPage/>
         </Route>
         <Route path='/forgotpassword' exact>
           <ForgotPasswordPage/>

@@ -77,13 +77,23 @@ function CardUI() {
           Change Password
         </span>
         <span
-          id="menu"
-          class='fadeIn third'>
+          id='menu'
+          class='fadeIn third'
+          onClick={(e) => {
+            e.preventDefault();
+            window.location = "/viewschedules";
+          }}
+        >
           view schedule
         </span>
         <span
-          id="menu"
-          class='fadeIn third'>
+          id='menu'
+          class='fadeIn third'
+          onClick={(e) => {
+            e.preventDefault();
+            window.location = "/availability";
+          }}
+        >
           Update availability
         </span>
             <span class="floatingboat">
