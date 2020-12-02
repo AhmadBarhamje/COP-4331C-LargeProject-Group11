@@ -50,9 +50,15 @@ const doRefresh = async event =>
     // sendToAPI.newAvailability.thu = res.data.availability.thu;
     // sendToAPI.newAvailability.fri = res.data.availability.fri;
     // sendToAPI.newAvailability.sat = res.data.availability.sat;
-    MOCK_DATA.concat(sendToAPI);
+    //MOCK_DATA.concat(sendToAPI); // does not work
     console.log(sendToAPI.newAvailability);
     //this.updateData();
+}
+
+const doSubmit = async event =>
+{
+    event.preventDefault();
+    // submit sendToAPI back to setAvability();
 }
 
 export const BasicTable = () => {
@@ -114,6 +120,7 @@ export const BasicTable = () => {
     return (
         <>
         <button onClick={doRefresh}>Refresh</button>
+        <button onClick={doSubmit}>Submit</button>
         <table {...getTableProps()}>
             <thead>
                 {headerGroups.map((headerGroups) => ( 
