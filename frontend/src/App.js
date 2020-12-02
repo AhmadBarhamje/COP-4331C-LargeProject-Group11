@@ -7,6 +7,7 @@ import CardPage from './pages/CardPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import BestSchedulePage from './pages/BestSchedulePage';
 
 function App() {
   return (
