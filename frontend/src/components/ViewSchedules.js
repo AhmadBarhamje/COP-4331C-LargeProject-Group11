@@ -33,41 +33,27 @@ function ViewSchedules() {
     <div class='wrapper fadeIn first'>
       <div id='cardUIDiv'>
         <br />
-        <br />
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = "/changepassword";
-          }}
-        >
+        
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/changepassword"; }} >
           {" "}
           Change Password
         </span>
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = "/cards";
-          }}
-        >
-          {" "}     
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/cards"; }} >
           Dashboard
         </span>
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = "/availability";
-          }}
-        >
-          {" "}
-          Update availability
-        
-    </span>
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/availability"; }} >
+          Update Availability
+        </span>
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editgroups"; }} >
+          Create/Delete group
+        </span>
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editusers"; }} >
+          Add/Remove Users
+        </span>
+
+        <br />
+        <p>List of groups</p> 
+        <p>When you click on a group it would go to <a href = '/selectedgroup'>this page</a></p>
   </div>
 </div>
   );

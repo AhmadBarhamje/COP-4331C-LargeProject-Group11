@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import api from "../api";
 
-function Availability() {
+function EditUsers() {
 
 
-const submitSchedule = async event =>
+const addUser = async event =>
 {
     const res = await api.protected();
 };
-const resetSchedule = async event =>
+const removeUser = async event =>
 {
     const res = await api.protected();
 };
-const selectAll = async event =>
-{
-    const res = await api.protected();
-};
+
   const [message, setMessage] = useState("");
   
 
@@ -39,8 +36,8 @@ const selectAll = async event =>
   return (
     <div class='wrapper fadeIn first'>
       <div id='cardUIDiv'>
+        
         <br />
-       
         <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/changepassword"; }} >
           {" "}
           Change Password
@@ -48,23 +45,29 @@ const selectAll = async event =>
         <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/viewschedules"; }} >
           View Groups
         </span>
-        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/cards"; }} >
-          Dashboard
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/availability"; }} >
+          Update availability
         </span>
         <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editgroups"; }} >
           Create/Delete group
         </span>
-        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editusers"; }} >
-          Add/Remove Users
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/cards"; }} >
+          Dashboard
         </span>
         <br />
-        <input type="button" id="submitScheduleButton" className="buttons" value = "Submit" onClick={submitSchedule} />
-        <input type="button" id="resetScheduleButton" className="buttons" value = "Reset" onClick={resetSchedule} />
-        <input type="button" id="selectAllScheduleButton" className="buttons" value = "Select All" onClick={selectAll} />
-
-        <br />
-        <p>Schedule goes here</p>
-
+            <span id="inner-title" class= 'fadeIn third'>ADD OR REMOVE USERS</span><br /><br />
+            
+            <form id="registerForm" class= 'fadeIn third' > 
+            <input type="text" id="groupName" class="fadeIn second" placeholder="Enter Group Name" 
+            //ref={(c) => registerUsername = c} 
+            required/><br />
+            <input type="text" id="userName" class="fadeIn second" placeholder="Enter Username" 
+            //ref={(c) => registerUsername = c} 
+            required/><br />
+            <input type="button" id="addButton" className="buttons" value = "Add" onClick={addUser} />
+            <input type="button" id="removeButton" className="buttons" value = "Remove" onClick={removeUser} />
+            </form>
+            <span id="editUserResult">{message}</span>
         </div>
     </div>
 
@@ -73,4 +76,4 @@ const selectAll = async event =>
   );
 }
 
-export default Availability;
+export default EditUsers;

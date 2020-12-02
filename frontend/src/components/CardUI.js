@@ -64,37 +64,22 @@ function CardUI() {
     <div class='wrapper fadeIn first'>
       <div id='cardUIDiv'>
         <br />
-        <br />
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location = "/changepassword";
-          }}
-        >
+        
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/changepassword"; }} >
           {" "}
           Change Password
         </span>
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location = "/viewschedules";
-          }}
-        >
-          view schedule
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/viewschedules"; }} >
+          View Groups
         </span>
-        <span
-          id='menu'
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location = "/availability";
-          }}
-        >
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/availability"; }} >
           Update availability
+        </span>
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editgroups"; }} >
+          Create/Delete group
+        </span>
+        <span id='menu' class='fadeIn third' onClick={(e) => { e.preventDefault(); window.location = "/editusers"; }} >
+          Add/Remove Users
         </span>
             <span class="floatingboat">
             <div class="waves background"></div>

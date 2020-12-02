@@ -9,6 +9,10 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import AvailabilityPage from './pages/AvailabilityPage';
 import ViewSchedulesPage from './pages/ViewSchedulesPage';
+import EditGroupsPage from './pages/EditGroupsPage';
+import EditUsersPage from './pages/EditUsersPage';
+import SelectedGroupPage from './pages/SelectedGroupPage';
+
 
 function App() {
   return (
@@ -22,6 +26,15 @@ function App() {
         </Route>
         <Route path="/availability" exact>
           <AvailabilityPage/>
+        </Route>
+        <Route path="/SelectedGroup" exact>
+          <SelectedGroupPage/>
+        </Route>
+        <Route path="/editusers" exact>
+          <EditUsersPage/>
+        </Route>
+        <Route path="/editgroups" exact>
+          <EditGroupsPage/>
         </Route>
         <Route path="/viewschedules" exact>
           <ViewSchedulesPage/>

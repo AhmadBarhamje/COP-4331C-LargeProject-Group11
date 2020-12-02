@@ -38,7 +38,7 @@ function ChangePassword() {
         <br />
         <form>
           <input
-            type='text'
+            type='password'
             id='loginName'
             class='fadeIn second'
             placeholder='Current Password'
@@ -47,7 +47,7 @@ function ChangePassword() {
           />
           <br />
           <input
-            type='text'
+            type='password'
             id='Email'
             value={newPassword}
             onChange={(e) => setnewPassword(e.target.value)}
