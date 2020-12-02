@@ -97,7 +97,7 @@ export default class StandardCalendar extends React.Component {
       startTime = {moment({h: 0, m: 0})}
       //endTime = {moment({h: 24, m: 59})}
       numberOfDays= {7}
-      dayFormat = {'dddd.'}
+      dayFormat = {'dddd'}
       scaleUnit = {30}
       //useModal = {false}
       selectedIntervals = {this.state.selectedIntervals}
