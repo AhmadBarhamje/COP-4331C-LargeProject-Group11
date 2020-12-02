@@ -14,6 +14,11 @@ function Login()
             window.location.href = '/register';
     }
     
+    const doForgetPassword = async (event) => {
+    event.preventDefault();
+    window.location.href = "/forgotpassword";
+  };
+
     const doLogin = async event => 
     {
         event.preventDefault();
@@ -71,7 +76,7 @@ function Login()
             <span id="loginResult">{message}</span>
         <div id="formFooter">
                <a class="underlineHover" onClick={goRegisterPage}>Register</a> <br />
-               <a class="underlineHover" >Forgot Password?</a>
+               <a class="underlineHover" onClick={doForgetPassword}>Forgot Password?</a>
     	</div>
 
         </div>
