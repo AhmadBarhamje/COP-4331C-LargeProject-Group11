@@ -15,8 +15,9 @@ const CardPage = () =>
         <div>
             <span id="userName">Showing Schedule for {firstName} {lastName}</span>
                 <span
-          id='menu'
-          class='fadeIn third'
+          type='submit'
+            id='loginButton'
+            className='buttons'
           onClick={(e) => {
             e.preventDefault();
             window.location = "/cards";
