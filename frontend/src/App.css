@@ -38,13 +38,32 @@
   }
 }
 
+
+
+
+#menu{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  margin: 40px 8px 10px 8px; 
+  color: black;
+}
 a {
   color: #92badd;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
 }
-#inner-title {
+.a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+#inner-title, #menu:hover {
   border-bottom: 2px solid #5fbae9;
   text-align: center;
   font-size: 16px;
@@ -80,6 +99,7 @@ a {
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
+
 #cardUIDiv{
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
@@ -96,9 +116,9 @@ a {
 }
 
 .topbanner{
-  background: #fff;
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
+  background-color: #fff;
   height: 60px;
   width: 100%;
   max-width: 1500px;
@@ -156,13 +176,17 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 }
 
 #logoutButton{
-  background-color: #fff;
-  color: black;
+  background-color: #56baed;
+  color:black;
   padding:15px 40px;
   margin-left:60%;
   }
+#logoutButton:hover{
+  background-color:#4BA3E9;
+  color:#f6f6f6
+}
 
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -310,4 +334,105 @@ input[type=text]:placeholder {
 
 * {
   box-sizing: border-box;
+}
+
+/*Boat animation*/
+
+.floatingboat{
+      height: 100%;
+      overflow: hidden;
+}
+
+.waves {
+    animation: wave 2s ease-in-out 0s infinite alternate;
+    background: repeat-x url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/waves.png') center top;
+    background-size: auto 80px;
+    bottom: -10px;
+    height: 80px;
+    left: -13%;
+    position: absolute;
+    width: 120%;
+}
+.waves.background {
+    animation-direction: alternate-reverse;
+    bottom: 30px;
+    left: -18%;
+}
+
+.boat-wrapper {
+    animation: boat 20s linear 0s infinite;
+    bottom: 25px;
+    height: 200px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.boat {
+    animation: bobble 2s ease-in-out 0s infinite alternate;
+    background: no-repeat url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/boat.png') center bottom;
+    background-size: contain;
+    height: 100%;
+    margin: 0 auto;
+    width: 200px;
+}
+
+.whale {
+    animation: whale 20s linear 0s infinite;
+    background: no-repeat url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/whale.png') center center;
+    background-size: contain;
+    bottom: 0;
+    height: 350px;
+    left: 50%;
+    margin-left: -200px;
+    position: absolute;
+    transform: rotate(40deg);
+    width: 350px;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(6%);
+    }
+}
+
+@keyframes boat {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes bobble {
+    0% {
+        transform: translateY(0) rotate(-4deg);
+    }
+    100% {
+        transform: translateY(3%) rotate(3deg);
+    }
+}
+
+@keyframes whale {
+    0% {
+        transform: translateY(100%) rotate(40deg);
+    }
+    72% {
+        transform: translateY(100%) rotate(40deg);
+    }
+    76% {
+        transform: translateY(10%) rotate(80deg);
+    }
+    77% {
+        transform: translateY(20%) rotate(90deg);
+    }
+    80% {
+        transform: translateY(100%) rotate(120deg);
+    }
+    100% {
+        transform: translateY(100%) rotate(120deg);
+    }
 }
