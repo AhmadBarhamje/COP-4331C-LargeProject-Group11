@@ -23,8 +23,8 @@ function LoggedInName()
     };    
 
   return(
-   <div id="loggedInDiv fadeIn fourth topbanner">
-   <span id="userName">Logged In As {firstName} {lastName}</span>
+   <div class="loggedInDiv fadeIn fourth topbanner">
+   <span class="userName">Logged In As {firstName} {lastName}</span>
    <button type="button" id="logoutButton" class="buttons" 
      onClick={doLogout}> Log Out </button>
    </div>
