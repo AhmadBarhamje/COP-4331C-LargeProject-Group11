@@ -44,7 +44,7 @@ class Modal extends React.Component {
       value,
     } = this.props;
     return (
-      <div className="customModal">
+      <div class="customModal">
         <div className="customModal__text">{this.renderText()}</div>
         <button className="customModal__button buttons" type="button" onClick={this.handleRemove}>Delete</button>
         <button className="customModal__button customModal__button_float_right buttons" type="button" onClick={this.handleSave}>Save</button>
