@@ -85,7 +85,7 @@ function CardUI() {
           }}
         >
           {" "}
-          Change Password
+          View Schedule
         </span>
         
             <span class="floatingboat">
