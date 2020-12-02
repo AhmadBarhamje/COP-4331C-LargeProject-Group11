@@ -3,17 +3,53 @@ import api from "../api";
 
 function EditGroups() {
 
+    const [message, setMessage] = useState("");
+    var groupName;
 
 const addGroup = async event =>
 {
-    const res = await api.protected();
-};
-  const [message, setMessage] = useState("");
+    event.preventDefault();
+    console.log("access token", localStorage.getItem("accessToken"));
+    var obj = {  name:groupName.value };
+    let res;
+    try {
+      res = await api.createSchedule(obj);
+      console.log("res from change", res);
+      if (res.data.success) {
+        setMessage("Group Added");
+      } else {
+        setMessage(res.data.error);
+      }
+    } catch (e) {
+      alert(e.toString());
+      return;
+    }
+  };
+
+
+
 
 const deleteGroup = async event =>
 {
-    const res = await api.protected();
+    event.preventDefault();
+    
+    console.log("access token", localStorage.getItem("accessToken"));
+    var obj = {  name:groupName };
+    let res;
+    try {
+      res = await api.deleteSchedule(obj);
+      console.log("res from change", res);
+      if (res.data.success) {
+        setMessage("Group Deleted");
+      } else {
+        setMessage(res.data.error);
+      }
+    } catch (e) {
+      alert(e.toString());
+      return;
+    }
 };
+/* wasnt sure what this is or if its needed
 
   var _ud = localStorage.getItem("user_data");
   var ud = JSON.parse(_ud);
@@ -30,6 +66,8 @@ const deleteGroup = async event =>
       return "http://localhost:5000/" + route;
     }
   }
+*/
+ 
 
     
   
@@ -60,8 +98,7 @@ const deleteGroup = async event =>
             <span id="inner-title" class= 'fadeIn third'>ADD OR DELETE GROUPS</span><br /><br />
             
             <form id="registerForm" class= 'fadeIn third'> 
-            <input type="text" id="groupName" class="fadeIn second" placeholder="Enter Group Name" 
-            //ref={(c) => registerUsername = c} 
+            <input type="text" id="groupName" class="fadeIn second" placeholder="Enter Group Name" ref={(c) => groupName = c} 
             required/><br />
             <input type="button" id="addButton" className="buttons" value = "Add" onClick={addGroup} />
             <input type="button" id="deleteButton" className="buttons" value = "Delete" onClick={deleteGroup} />

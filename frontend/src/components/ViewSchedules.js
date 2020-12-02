@@ -1,15 +1,13 @@
+import { set } from "mongoose";
 import React, { useState } from "react";
 import api from "../api";
 
 function ViewSchedules() {
-
-    const doRegister = async event =>
-    {
-        const res = await api.protected();
-    };
-
-
+  
   const [message, setMessage] = useState("");
+
+   
+
 
 
   var _ud = localStorage.getItem("user_data");
@@ -52,8 +50,8 @@ function ViewSchedules() {
         </span>
 
         <br />
-        <p>List of groups</p> 
-        <p>When you click on a group it would go to <a href = '/selectedgroup'>this page</a></p>
+      <p>List of schedules</p>
+      <p>click on a schedule to go to <a href = '/selectedgroup'>this page</a></p>
   </div>
 </div>
   );

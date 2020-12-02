@@ -53,7 +53,7 @@ function Register()
             }
 
             
-            //api call
+            //api calls
             else
             {
                 res = await api.signup(obj); 

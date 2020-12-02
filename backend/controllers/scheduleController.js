@@ -117,10 +117,9 @@ exports.removeMember = async (req, res) => {
         return res.status(200).json({success:true});
     } catch(error) {
         console.error(error);
-        return res.status(500).json({ e: "Internal Server Error!" });
+        return res.status(200).json({ e: "Internal Server Error!" });
     }
 }
-
 exports.deleteSchedule = async (req, res) => {
     try {
         let {id, userName} = req.user;
