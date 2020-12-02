@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, ScrollView, Alert, Button } from 'react-native';
 
 let bestSchedule = {sun: Array(48).fill(Array(48).fill(null)), mon: Array(48).fill(Array(48).fill(null)), tue: Array(48).fill(Array(48).fill(null)), wed: Array(48).fill(Array(48).fill(null)), thu: Array(48).fill(Array(48).fill(null)), fri: Array(48).fill(Array(48).fill(null)), sat: Array(48).fill(Array(48).fill(null))};
 let membersLength = 0;
