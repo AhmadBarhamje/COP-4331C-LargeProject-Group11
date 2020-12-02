@@ -46,8 +46,8 @@ class Modal extends React.Component {
     return (
       <div className="customModal">
         <div className="customModal__text">{this.renderText()}</div>
-        <button className="customModal__button" onClick={this.handleRemove}>Delete</button>
-        <button className="customModal__button customModal__button_float_right" onClick={this.handleSave}>Save</button>
+        <button className="customModal__button buttons" type="button" onClick={this.handleRemove}>Delete</button>
+        <button className="customModal__button customModal__button_float_right buttons" type="button" onClick={this.handleSave}>Save</button>
       </div>
     );
   }
