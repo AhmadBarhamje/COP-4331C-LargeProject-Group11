@@ -16,7 +16,7 @@ const options = [
     { value: 'user2', label: 'user2' },
 ];
 
-export default function Schedual() {
+export default function Schedule() {
     const [changePage, setChangePage] = useState(0)
     const [openSidePanel, setOpenSidePanel] = useState(true)
     const [date, setDate] = useState()
@@ -25,7 +25,7 @@ export default function Schedual() {
     const [selectedUser, setSelectedUser] = useState([])
     const [name, setName] = useState()
 
-    const [schedualList, setSchedualList] = useState([])
+    const [scheduleList, setScheduleList] = useState([])
 
 
     const handleChange = selectedUser => {
@@ -34,14 +34,14 @@ export default function Schedual() {
         setSelectedUser(selectedUser);
     };
 
-    const addSchedual = () => {
-        let schedual = {
+    const addSchedule = () => {
+        let schedule = {
             name: name,
             date: date,
             time: time,
             usersList: selectedUser
         }
-        setSchedualList([...schedualList, schedual])
+        setScheduleList([...scheduleList, schedule])
     }
 
     const events = {
@@ -117,7 +117,7 @@ export default function Schedual() {
                             e.preventDefault();
                             setChangePage(0)
                         }}>
-                        <text className="code">Set Schedual</text>
+                        <text className="code">Set Schedule</text>
                     </div>
                     <div
                         className={changePage == 1 ? "selected p-4 d-flex justify-content-center align-items-center" : " header-options p-4 d-flex justify-content-center align-items-center"}
@@ -126,7 +126,7 @@ export default function Schedual() {
                             e.preventDefault();
                             setChangePage(1)
                         }}>
-                        <text className="code">View Schedual</text>
+                        <text className="code">View Schedule</text>
                     </div>
                 </div>
 
@@ -140,10 +140,10 @@ export default function Schedual() {
                                     style={{ height: "90%", borderRight: "2px solid #56baed" }}>
                                     <div className="w-100 p-2  d-flex flex-column align-items-center">
                                         {
-                                            schedualList.map((schedual, index) => {
+                                            scheduleList.map((schedule, index) => {
                                                 return (
                                                     <div className="mt-2 p-2 w-100 d-flex justify-content-start align-items-center" style={{ border: "1px solid #56baed" }}>
-                                                        <text key={index}>{schedual.name}</text>
+                                                        <text key={index}>{schedule.name}</text>
                                                     </div>
                                                 )
 
@@ -155,7 +155,7 @@ export default function Schedual() {
                                         variant="primary"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            addSchedual();
+                                            addSchedule();
                                         }}
                                     >Create New</Button>
                                 </div>
@@ -185,16 +185,16 @@ export default function Schedual() {
                                             <Col xs='6'>
                                                 <Form className="w-100">
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Schedual Name</Form.Label>
+                                                        <Form.Label>Schedule Name</Form.Label>
                                                         <Form.Control
                                                             onChange={(e) => {
                                                                 e.preventDefault();
                                                                 setName(e.target.value)
                                                             }}
                                                             value={name}
-                                                            className="w-100" type="text" placeholder="Enter schedual name" />
+                                                            className="w-100" type="text" placeholder="Enter schedule name" />
                                                         <Form.Text className="text-muted">
-                                                            Name to identify the Schedual
+                                                            Name to identify the Schedule
                                                         </Form.Text>
                                                     </Form.Group>
                                                 </Form>

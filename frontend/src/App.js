@@ -8,7 +8,7 @@ import CardPage from './pages/CardPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
-import Schedual from './pages/Schedual'
+import Schedule from './pages/Schedule'
 function App() {
   return (
     <Router>
@@ -28,8 +28,8 @@ function App() {
         <Route path="/cards" exact>
           <CardPage/>
         </Route>
-        <Route path="/schedual" exact>
-          <Schedual/>
+        <Route path="/schedule" exact>
+          <Schedule/>
         </Route>
         <Redirect to="/"/>
       </Switch>
