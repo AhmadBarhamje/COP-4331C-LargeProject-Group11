@@ -2,6 +2,7 @@ import React from 'react';
 import { BasicTable } from '../components/BasicTable';
 import Calendar from '../components/Calendar';
 import CalendarComponent from '../components/CalendarComponent';
+import TopBanner from '../components/TopBanner';
 //import BasicTable from '../components/BasicTable'
 
 const CardPage = () =>
@@ -13,19 +14,7 @@ const CardPage = () =>
 
     return(
         <div>
-            <span id="userName">Showing Schedule for {firstName} {lastName}</span>
-                <span
-          type='submit'
-            id='loginButton'
-            className='buttons'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location = "/cards";
-          }}
-        >
-          {" "}
-          Back to Dashboard
-        </span>
+            <TopBanner />
             <CalendarComponent />
         </div>
         );
