@@ -14,7 +14,7 @@ const CardPage = () =>
     return(
         <div>
             <span id="userName">Showing Schedule for {firstName} {lastName}</span>
-            <BasicTable />
+            <CalendarComponent />
         </div>
         );
 }

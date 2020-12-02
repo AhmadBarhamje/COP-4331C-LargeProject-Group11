@@ -60,6 +60,29 @@ const doSubmit = async event =>
     event.preventDefault();
     // submit sendToAPI back to setAvability();
 }
+function convertData(variable) {
+    if (variable == 0)
+    {
+       (variable = true);
+    }
+    else if (variable == 1)
+    {
+        (variable = false);
+    }
+    return variable;
+}
+
+function convertToBinary(input) {
+    if (input == true)
+    {
+       (input = 0);
+    }
+    else if (input == false)
+    {
+        (input= 1);
+    }
+    return input;
+}
 
 export const BasicTable = () => {
 
@@ -73,7 +96,14 @@ export const BasicTable = () => {
         const [value, setValue] = React.useState(initialValue)
       
         const onClick = e => {
-          setValue(e.target.value = 1 - e.target.value);
+            // if (e.target.value == true || false)
+            // {
+            //     convertToBinary(e.target.value);
+            // }
+            // var variable = 1 - e.target.value;
+            // variable = convertData(variable)
+            setValue(e.target.value = 1 - e.target.value);
+          
           updateData(index, id, e.target.value);
         }
 
