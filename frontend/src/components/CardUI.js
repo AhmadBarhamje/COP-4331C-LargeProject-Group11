@@ -81,10 +81,16 @@ function CardUI() {
           class='fadeIn third'>
           view schedule
         </span>
-        <span
-          id="menu"
-          class='fadeIn third'>
-          Update availability
+                <span
+          id='menu'
+          class='fadeIn third'
+          onClick={(e) => {
+            e.preventDefault();
+            window.location = "/schedule";
+          }}
+        >
+          {" "}
+          Update Availability
         </span>
             <span class="floatingboat">
             <div class="waves background"></div>
