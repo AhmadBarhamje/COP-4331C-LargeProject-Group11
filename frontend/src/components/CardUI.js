@@ -14,7 +14,7 @@ function CardUI() {
   var userId = ud.id;
   var firstName = ud.firstName;
   var lastName = ud.lastName;
-
+  
 
   const app_name = "cop4331-group11-large";
   function buildPath(route) {
@@ -78,12 +78,7 @@ function CardUI() {
         </span>
         <span
           id="menu"
-          class='fadeIn third'
-          onClick={(e) => {
-            e.preventDefault();
-            window.location = "/schedual";
-          }}
-        >
+          class='fadeIn third'>
           view schedule
         </span>
         <span
@@ -91,15 +86,15 @@ function CardUI() {
           class='fadeIn third'>
           Update availability
         </span>
-        <span class="floatingboat">
-          <div class="waves background"></div>
-          <div class="boat-wrapper">
-            <div class="boat"></div>
-          </div>
-          <div class="waves foreground"></div>
-        </span>
-      </div>
-    </div>
+            <span class="floatingboat">
+            <div class="waves background"></div>
+            <div class="boat-wrapper">
+          <div class="boat"></div>
+         </div>
+      <div class="waves foreground"></div>
+    </span>
+  </div>
+</div>
   );
 }
 
