@@ -14,6 +14,17 @@ const CardPage = () =>
     return(
         <div>
             <span id="userName">Showing Schedule for {firstName} {lastName}</span>
+                <span
+          id='menu'
+          class='fadeIn third'
+          onClick={(e) => {
+            e.preventDefault();
+            window.location = "/cards";
+          }}
+        >
+          {" "}
+          Back to Dashboard
+        </span>
             <CalendarComponent />
         </div>
         );
