@@ -81,7 +81,7 @@ function CardUI() {
           class='fadeIn third'
           onClick={(e) => {
             e.preventDefault();
-            window.location = "/schedual";
+            window.location = "/schedule";
           }}
         >
           view schedule
