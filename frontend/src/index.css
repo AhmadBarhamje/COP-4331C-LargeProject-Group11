@@ -1,12 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
-body {
+.body {
   background-color: #56baed;
   font-family: "Poppins", sans-serif;
   height: 100vh;
 
 }
 
-code {
+.code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.selected{
+  border-bottom: 2px solid #56baed;
+  border-radius: 10px;
+  color: #56baed;
+  cursor: pointer;
+}
+
+.header-options:hover{
+  border-bottom: 2px solid #56baed;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.styles_time_table_wrapper__1-rtp {
+  height: fit-content !important;
+}
+
+
