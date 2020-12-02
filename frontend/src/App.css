@@ -24,6 +24,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.customModal{
+  width: 400px;
+  height:150px;
+}
 
 .App-link {
   color: #61dafb;
