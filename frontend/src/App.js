@@ -21,6 +21,9 @@ function App() {
         <Route path='/forgotpassword' exact>
           <ForgotPasswordPage/>
         </Route>
+        <Route path='/schedule' exact>
+          <BestSchedulePage/>
+        </Route>
         <Route path='/changepassword' exact>
           <ChangePasswordPage/>
         </Route>
